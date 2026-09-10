@@ -162,18 +162,46 @@ const ICON_BTN =
         else link.removeAttribute('aria-current');
       });
     };
-    // Feedback inmediato al hacer click, sin esperar al scroll suave.
+    // Feedback inmediato al hacer click + bloqueo de navegación: durante el
+    // scroll suave el observer ignora las secciones de paso para que el
+    // activo no "rebote" por Inicio, Sobre mí, etc. hasta llegar al destino.
+    let navTarget = null;
+    let navTimer = null;
+    const releaseNavLock = () => {
+      navTarget = null;
+      if (navTimer) clearTimeout(navTimer);
+      navTimer = null;
+    };
     navLinks.forEach((link) => {
       link.addEventListener('click', () => {
-        setActive(link.getAttribute('data-path') || (link.getAttribute('href') || '').replace('#', ''));
+        const path = link.getAttribute('data-path') || (link.getAttribute('href') || '').replace('#', '');
+        releaseNavLock();
+        navTarget = path;
+        setActive(path);
+        // Red de seguridad por si el destino nunca intersecta.
+        navTimer = setTimeout(releaseNavLock, 2500);
       });
     });
+    // Si el usuario toma el control manual, se libera el bloqueo.
+    window.addEventListener('wheel', releaseNavLock, { passive: true });
+    window.addEventListener('touchmove', releaseNavLock, { passive: true });
     const sections = document.querySelectorAll('main section[id]');
     if ('IntersectionObserver' in window && sections.length > 0) {
       const spy = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
-            if (entry.isIntersecting) setActive(entry.target.getAttribute('id') || '');
+            if (!entry.isIntersecting) return;
+            const id = entry.target.getAttribute('id') || '';
+            // Con bloqueo activo solo el destino puede tomar el activo;
+            // al llegar se libera para volver al modo libre.
+            if (navTarget) {
+              if (id === navTarget) {
+                setActive(id);
+                releaseNavLock();
+              }
+              return;
+            }
+            setActive(id);
           });
         },
         { rootMargin: '-40% 0px -55% 0px', threshold: 0 }
@@ -182,6 +210,7 @@ const ICON_BTN =
     } else {
       // Fallback sin IntersectionObserver: primera sección visible.
       const onScroll = () => {
+        if (navTarget) return;
         let current = '';
         const pos = window.scrollY + 180;
         sections.forEach((s) => {
