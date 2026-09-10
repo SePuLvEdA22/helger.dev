@@ -12,7 +12,9 @@ const links = [
 
 // Clases de estado del scroll-spy. Se alternan con classList (nunca se
 // reescribe className) para no romper las clases base de layout.
-const ACTIVE = 'font-semibold bg-primary text-on-primary shadow-sm';
+// NOTA: mismo font-weight en ambos estados para que el pill activo no
+// cambie de ancho y se salga del contenedor (el activo se distingue por fondo).
+const ACTIVE = 'font-medium bg-primary text-on-primary shadow-sm';
 const INACTIVE =
   'font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-200/70 dark:text-on-surface-variant dark:hover:text-white dark:hover:bg-surface-container-high';
 
@@ -62,7 +64,7 @@ const ICON_BTN =
             data-path={l.path}
             data-active={i === 0 ? 'true' : 'false'}
             aria-current={i === 0 ? 'page' : undefined}
-            class={`nav-item shrink-0 whitespace-nowrap rounded-full px-3.5 py-1.5 text-sm transition-all ${i === 0 ? ACTIVE : INACTIVE}`}
+            class={`nav-item shrink-0 whitespace-nowrap rounded-full px-3.5 py-1.5 text-sm transition-colors ${i === 0 ? ACTIVE : INACTIVE}`}
           >
             {l.label}
           </a>
