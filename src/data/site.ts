@@ -46,52 +46,42 @@ export const projects: Project[] = [
     title: 'BodyFitGym',
     subtitle: 'Sistema de Control de Acceso & Gestión Integral de Gimnasio',
     description:
-      'Aplicación de escritorio desarrollada en Electron que gestiona membresías, control de pagos recurrentes y acceso físico automatizado mediante hardware Arduino y torniquetes/sensores en tiempo real. Resuelve la sincronización local sin dependencia constante de internet.',
-    tech: ['Electron', 'JavaScript', 'Arduino', 'Node.js', 'Hardware I/O', 'SQLite'],
+      'Sistema profesional de administración y control de acceso para gimnasios: app de escritorio Electron + React con membresías, pagos recurrentes, SQLite local, auto-update con electron-updater y monitoreo Sentry. Integración con hardware de acceso físico en tiempo real.',
+    tech: ['Electron', 'TypeScript', 'React', 'SQLite', 'Sentry', 'Vite'],
     codeUrl: 'https://github.com/SePuLvEdA22/software_gym',
     badge: 'Producción Local'
   },
   {
-    // PLACEHOLDER — reemplaza con tu proyecto real (ej. tienda online en Next.js)
-    kicker: 'Web Application / SaaS',
+    kicker: 'Web Application',
     kickerColor: 'secondary',
-    title: 'CloudTask SaaS',
-    subtitle: 'Gestión de Flujos y Tareas en Tiempo Real',
+    title: 'RH Events',
+    subtitle: 'Landing Moderna de Eventos & Responsive',
     description:
-      'Arquitectura fullstack con renderizado híbrido, autenticación JWT, API RESTful y microservicios containerizados para productividad colaborativa empresarial.',
-    tech: ['Next.js', 'React', 'Docker', 'AWS'],
-    codeUrl: 'https://github.com/SePuLvEdA22',
-    demoUrl: '#contacto',
-    demoLabel: 'Demo Info',
-    placeholder: true
+      'Landing profesional para servicios de eventos con galería interactiva, testimonios y formulario de contacto. Construida con React 18, Vite 5, Tailwind CSS y Lucide, optimizada para todos los dispositivos.',
+    tech: ['React', 'Vite', 'Tailwind', 'JavaScript'],
+    codeUrl: 'https://github.com/SePuLvEdA22/rh-events'
   },
   {
-    // PLACEHOLDER — reemplaza con tu proyecto real
-    kicker: 'Backend & Microservicios',
+    kicker: 'Mobile App / Finanzas',
     kickerColor: 'tertiary',
-    title: 'DevMetrics API',
-    subtitle: 'Monitoreo y Telemetría en Tiempo Real',
+    title: 'Control Gastos App',
+    subtitle: 'Gestión de Finanzas Personales en Expo',
     description:
-      'Servicio backend escalable para ingesta de eventos de infraestructura y métricas con arquitectura serverless y contenedores de alta disponibilidad.',
-    tech: ['Node.js', 'Docker', 'AWS Lambda', 'Redis'],
-    codeUrl: 'https://github.com/SePuLvEdA22',
-    demoUrl: '#contacto',
-    demoLabel: 'Endpoints',
-    placeholder: true
+      'App móvil con Expo Router y React Native para registro de gastos, persistencia con Async Storage y Secure Store, autenticación local biométrica y estado global con Zustand.',
+    tech: ['Expo', 'React Native', 'TypeScript', 'Zustand'],
+    codeUrl: 'https://github.com/SePuLvEdA22/control_gastos'
   },
   {
-    // PLACEHOLDER — reemplaza con tu tienda online en Next.js cuando esté lista
     kicker: 'E-Commerce Moderno',
     kickerColor: 'primary',
-    title: 'NextCommerce Store',
-    subtitle: 'E-Commerce Headless de Alto Rendimiento',
+    title: 'Serene Boutique',
+    subtitle: 'Tienda Fullstack con Dashboard & Deploy en Vercel',
     description:
-      'Tienda digital moderna con Server-Side Rendering (SSR), carrito persistente sincronizado, optimización SEO avanzada y pasarela segura de cobros.',
-    tech: ['Next.js', 'TypeScript', 'Tailwind', 'Stripe'],
-    codeUrl: 'https://github.com/SePuLvEdA22',
-    demoUrl: '#contacto',
-    demoLabel: 'Preview',
-    placeholder: true
+      'E-commerce Next.js 16 + React 19 con catálogo, carrito, auth con jose + bcrypt, base Neon Postgres, uploads en Vercel Blob, dashboard con Recharts y tests con Vitest.',
+    tech: ['Next.js', 'TypeScript', 'Tailwind', 'Neon', 'Vercel Blob'],
+    codeUrl: 'https://github.com/SePuLvEdA22/serene-boutique',
+    demoUrl: 'https://serene-boutique.vercel.app',
+    demoLabel: 'Ver Demo'
   }
 ];
 
