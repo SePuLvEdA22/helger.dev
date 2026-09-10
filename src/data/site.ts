@@ -9,10 +9,17 @@ export const site = {
     'Construyendo soluciones de software de alto impacto, aplicaciones de escritorio interactivas y arquitecturas web modernas, eficientes y escalables.',
   location: 'Cúcuta, Colombia',
   timezone: 'GMT-5',
+  // PENDIENTE: confirmar dominio final de Vercel (ej. https://helger-dev.vercel.app o https://helger.dev)
+  url: 'https://helger.dev',
+  ogImage: '/favicon.svg', // PENDIENTE: generar og-image 1200x630 en /public y actualizar aquí
   github: 'https://github.com/SePuLvEdA22',
   githubHandle: 'github.com/SePuLvEdA22',
-  linkedin: '#', // ej. https://www.linkedin.com/in/tu-usuario
+  linkedin: '#', // PENDIENTE: ej. https://www.linkedin.com/in/tu-usuario
   email: 'hj.santiago.sepulveda@gmail.com',
+  // PENDIENTE: subir el PDF a /public/cv-helger-santiago.pdf para activar el botón
+  cvUrl: '/cv-helger-santiago.pdf',
+  // PENDIENTE (opcional): solo dígitos con código país, ej. '573001234567'. Vacío = se oculta.
+  whatsapp: '',
   availability: 'Disponible para nuevos proyectos / Open to Work',
 } as const;
 

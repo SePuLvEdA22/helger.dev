@@ -18,7 +18,7 @@ const INACTIVE =
 
 // Botones de icono del header (tema, GitHub, menú) en ambos modos.
 const ICON_BTN =
-  'border-slate-300/70 bg-slate-200/60 text-slate-600 hover:bg-slate-300 hover:text-slate-900 dark:border-surface-container-high/50 dark:bg-surface-container-low dark:text-on-surface-variant dark:hover:bg-surface-container-high dark:hover:text-on-surface';
+  'min-h-[44px] min-w-[44px] border-slate-300/70 bg-slate-200/60 text-slate-600 hover:bg-slate-300 hover:text-slate-900 dark:border-surface-container-high/50 dark:bg-surface-container-low dark:text-on-surface-variant dark:hover:bg-surface-container-high dark:hover:text-on-surface';
 ---
 
 <header
@@ -117,7 +117,7 @@ const ICON_BTN =
           <a
             href={l.href}
             data-path={l.path}
-            class="mobile-link rounded-lg px-3 py-2 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-200 hover:text-slate-900 dark:text-on-surface-variant dark:hover:bg-surface-container-high dark:hover:text-white"
+            class="mobile-link flex min-h-[44px] items-center rounded-lg px-3 py-2 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-200 hover:text-slate-900 dark:text-on-surface-variant dark:hover:bg-surface-container-high dark:hover:text-white"
           >
             {l.label}
           </a>

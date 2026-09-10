@@ -37,8 +37,8 @@ const jsonPretty = JSON.stringify(
     </svg>
   </div>
 
-  <div class="relative grid grid-cols-1 items-center gap-6 lg:grid-cols-12">
-    <div class="flex flex-col items-start gap-4 lg:col-span-7">
+  <div class="relative grid min-w-0 max-w-full grid-cols-1 items-center gap-6 lg:grid-cols-12">
+    <div class="flex min-w-0 flex-col items-start gap-4 lg:col-span-7">
       <div class="reveal flex flex-wrap items-center gap-2">
         <div
           class="inline-flex items-center gap-2 rounded-full border border-emerald-600/30 bg-white px-3 py-1 shadow-sm dark:border-primary/30 dark:bg-surface-container-high/80"
@@ -80,23 +80,31 @@ const jsonPretty = JSON.stringify(
       <div class="reveal flex w-full flex-wrap items-center gap-3 pt-2 sm:w-auto" style="--reveal-delay: 240ms">
         <a
           href="#proyectos"
-          class="inline-flex transform items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-on-primary shadow-lg shadow-primary/25 transition-all hover:-translate-y-0.5 hover:bg-primary-fixed"
+          class="inline-flex min-h-[44px] transform items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-on-primary shadow-lg shadow-primary/25 transition-all hover:-translate-y-0.5 hover:bg-primary-fixed"
         >
           <span>Ver proyectos</span>
           <Icon name="arrow-down" size={18} />
         </a>
         <a
           href="#contacto"
-          class="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white px-6 py-3 text-sm font-medium text-slate-900 shadow-sm transition-all hover:bg-slate-100 dark:border-surface-container-high dark:bg-surface-container dark:text-white dark:hover:bg-surface-container-high"
+          class="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white px-6 py-3 text-sm font-medium text-slate-900 shadow-sm transition-all hover:bg-slate-100 dark:border-surface-container-high dark:bg-surface-container dark:text-white dark:hover:bg-surface-container-high"
         >
           <Icon name="send" size={18} class="text-sky-600 dark:text-secondary" />
           <span>Contactarme</span>
         </a>
         <a
+          href={site.cvUrl}
+          download
+          class="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl border border-emerald-600/30 bg-emerald-600/10 px-6 py-3 text-sm font-semibold text-emerald-700 transition-all hover:bg-emerald-500 hover:text-white dark:border-primary/40 dark:bg-primary/15 dark:text-primary dark:hover:bg-primary dark:hover:text-on-primary"
+        >
+          <Icon name="arrow-down" size={18} />
+          <span>Descargar CV</span>
+        </a>
+        <a
           href={site.github}
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white px-4 py-3 font-mono text-xs text-slate-600 transition-all hover:bg-slate-100 hover:text-emerald-700 dark:border-surface-container-high/60 dark:bg-surface-container-low dark:text-on-surface-variant dark:hover:bg-surface-container dark:hover:text-primary"
+          class="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white px-4 py-3 font-mono text-xs text-slate-600 transition-all hover:bg-slate-100 hover:text-emerald-700 dark:border-surface-container-high/60 dark:bg-surface-container-low dark:text-on-surface-variant dark:hover:bg-surface-container dark:hover:text-primary"
         >
           <Icon name="terminal" size={18} />
           <span>{site.githubHandle}</span>
@@ -106,9 +114,9 @@ const jsonPretty = JSON.stringify(
     </div>
 
     {/* Consola: se mantiene oscura en ambos modos como widget de terminal */}
-    <div class="reveal mt-8 w-full lg:col-span-5 lg:mt-0" style="--reveal-delay: 200ms">
+    <div class="reveal mt-8 w-full min-w-0 lg:col-span-5 lg:mt-0" style="--reveal-delay: 200ms">
       <div
-        class="relative overflow-hidden rounded-xl border border-surface-container-high bg-surface-container-low shadow-2xl"
+        class="relative max-w-full overflow-hidden rounded-xl border border-surface-container-high bg-surface-container-low shadow-2xl"
       >
         <div
           class="flex items-center justify-between border-b border-surface-container-highest bg-surface-container-high px-4 py-2.5"
@@ -124,8 +132,8 @@ const jsonPretty = JSON.stringify(
             <span class="font-mono text-[11px] text-primary/90">v2.4.0-stable</span>
           </div>
         </div>
-        <div class="overflow-x-auto bg-[#080e1a] p-5 font-mono text-xs leading-relaxed sm:text-[13px]">
-          <pre class="text-on-surface"><span class="text-tertiary">{'{'}</span>
+        <div class="terminal-scroll overflow-x-auto bg-[#080e1a] p-4 font-mono text-[12px] leading-relaxed sm:p-5 sm:text-[13px]">
+          <pre class="w-max min-w-full pr-4 text-on-surface"><span class="text-tertiary">{'{'}</span>
   <span class="text-secondary">"developer"</span>: <span class="text-primary-fixed">"Helger Santiago"</span>,
   <span class="text-secondary">"role"</span>: <span class="text-primary-fixed">"Software Engineer &amp; Architect"</span>,
   <span class="text-secondary">"status"</span>: <span class="text-primary">"Available"</span>,
@@ -162,10 +170,11 @@ const jsonPretty = JSON.stringify(
             type="button"
             data-json={jsonPretty}
             title="Copiar configuración"
-            class="flex cursor-pointer items-center gap-1 text-on-surface-variant transition-colors hover:text-white"
+            aria-label="Copiar configuración del perfil"
+            class="flex min-h-[44px] min-w-[44px] cursor-pointer items-center justify-center gap-1 px-2 text-on-surface-variant transition-colors hover:text-white"
           >
             <Icon name="copy" size={15} />
-            <span id="copy-json-text" class="font-mono text-[11px]">Copiar</span>
+            <span id="copy-json-text" class="font-mono text-[11px]" aria-live="polite">Copiar</span>
           </button>
         </div>
       </div>
