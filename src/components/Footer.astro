@@ -1,0 +1,41 @@
+---
+import Icon from './Icon.astro';
+import { site } from '../data/site';
+
+const footerLink =
+  'text-slate-600 hover:text-emerald-700 dark:text-on-surface-variant dark:hover:text-primary';
+const footerLinkSecondary =
+  'text-slate-600 hover:text-sky-700 dark:text-on-surface-variant dark:hover:text-secondary';
+---
+
+<footer class="relative z-10 w-full border-t border-slate-200 bg-white py-8 dark:border-surface-container-high dark:bg-surface-container-lowest">
+  <div class="mx-auto flex max-w-max-container flex-col items-center justify-between gap-4 px-margin-mobile md:flex-row lg:px-margin-desktop">
+    <div class="flex flex-col items-center gap-3 text-center sm:flex-row sm:text-left">
+      <span class="text-xs text-slate-600 dark:text-on-surface-variant">
+        © 2025 {site.brand}. {site.name}. Todos los derechos reservados.
+      </span>
+      <span class="hidden text-slate-300 sm:inline dark:text-surface-container-high">•</span>
+      <span class="rounded-full border border-emerald-600/20 bg-slate-200 px-2 py-0.5 font-mono text-[11px] text-emerald-700 dark:border-primary/20 dark:bg-surface-container-high dark:text-primary">
+        Construido con Astro, Tailwind CSS y TypeScript
+      </span>
+    </div>
+    <div class="flex items-center gap-4">
+      <a
+        href="#inicio"
+        class={`flex items-center gap-1 font-mono text-xs transition-colors ${footerLink}`}
+      >
+        <Icon name="arrow-up" size={16} />
+        <span>Arriba</span>
+      </a>
+      <a
+        href={site.github}
+        target="_blank"
+        rel="noopener noreferrer"
+        class={`flex items-center gap-1 font-mono text-xs transition-colors ${footerLinkSecondary}`}
+      >
+        <Icon name="terminal" size={16} />
+        <span>github</span>
+      </a>
+    </div>
+  </div>
+</footer>

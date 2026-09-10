@@ -1,0 +1,217 @@
+---
+import Icon from './Icon.astro';
+import { projects, site, type Project } from '../data/site';
+
+const kickerColor: Record<Project['kickerColor'], string> = {
+  primary: 'text-emerald-600 dark:text-primary',
+  secondary: 'text-sky-600 dark:text-secondary',
+  tertiary: 'text-indigo-500 dark:text-tertiary'
+};
+
+const dotColor: Record<Project['kickerColor'], string> = {
+  primary: 'bg-emerald-500 dark:bg-primary',
+  secondary: 'bg-sky-500 dark:bg-secondary',
+  tertiary: 'bg-indigo-400 dark:bg-tertiary'
+};
+
+const [featured, ...rest] = projects;
+---
+
+<section id="proyectos" class="relative z-10 mx-auto w-full max-w-max-container scroll-mt-24 px-margin-mobile py-16 lg:px-margin-desktop lg:py-24">
+  <div class="reveal mb-10 flex flex-col justify-between gap-4 md:flex-row md:items-end">
+    <div class="flex flex-col gap-1">
+      <span class="font-mono text-xs font-semibold uppercase tracking-widest text-sky-600 dark:text-secondary">02. / Portafolio</span>
+      <h2 class="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl lg:text-4xl dark:text-white">Proyectos Destacados</h2>
+      <p class="mt-1 max-w-xl text-sm text-slate-600 sm:text-base dark:text-on-surface-variant">
+        Una selección de trabajos recientes, implementaciones de producción y proyectos de código abierto.
+      </p>
+    </div>
+    <a
+      href={site.github}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="inline-flex items-center gap-1.5 font-mono text-xs text-emerald-700 transition-colors hover:text-emerald-600 sm:text-sm dark:text-primary dark:hover:text-primary-fixed"
+    >
+      <span>Ver todos en GitHub</span>
+      <Icon name="arrow-right" size={16} />
+    </a>
+  </div>
+
+  <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-12">
+    {/* ── Proyecto principal: BodyFitGym ─────────────────────────── */}
+    <article
+      class="reveal flex flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow-2xl md:col-span-2 lg:col-span-12 lg:flex-row dark:border-surface-container-high dark:bg-surface-container-low"
+    >
+      {/* Mock de telemetría: consola oscura intencional en ambos modos */}
+      <div
+        class="relative flex flex-col justify-between overflow-hidden border-b border-surface-container-high bg-surface-container-lowest p-5 sm:p-7 lg:w-7/12 lg:border-b-0 lg:border-r"
+      >
+        <div class="mb-4 flex items-center justify-between rounded-lg border border-surface-container-high bg-surface-container-low px-4 py-2 pb-3">
+          <div class="flex items-center gap-2">
+            <span class="h-2.5 w-2.5 animate-pulse rounded-full bg-primary"></span>
+            <span class="font-mono text-xs font-semibold text-white">BodyFitGym Control Station</span>
+          </div>
+          <span class="font-mono text-xs text-primary">COM3::SERIAL_CONNECTED</span>
+        </div>
+        <div class="space-y-2 rounded-xl border border-surface-container-high bg-surface-container p-4 font-mono text-xs">
+          <div class="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 border-b border-surface-container-high/60 pb-1 text-[11px] text-on-surface-variant">
+            <span>STREAM: ARDUINO_MEGA_2560</span>
+            <span class="font-semibold text-primary">STATUS: OPERATIONAL 99.98%</span>
+          </div>
+          <div class="space-y-1.5 pt-1 text-[11px] sm:text-[12px]">
+            <div class="flex items-center gap-2 text-primary">
+              <span class="font-bold text-secondary">[OK]</span> Biometric Reader Initialized (FPM10A)
+            </div>
+            <div class="flex items-center gap-2 text-on-surface-variant">
+              <span class="font-bold text-tertiary">[SYNC]</span> SQLite Database Synced with Local Cache
+            </div>
+            <div class="flex items-center gap-2 text-primary-fixed">
+              <span class="font-bold text-secondary">[EVENT]</span> Card ID #98421 Verified: Acceso Autorizado (Torniquete Abierto 3s)
+            </div>
+            <div class="flex items-center gap-2 text-on-surface-variant">
+              <span class="font-bold">[POLL]</span> Relé 1 Activo -&gt; Pulso 500ms enviado a pasarela electromecánica
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-wrap items-center gap-2 pt-4">
+          <span class="rounded border border-primary/20 bg-surface-container-high px-2.5 py-1 font-mono text-xs text-primary">BaudRate: 9600</span>
+          <span class="rounded border border-secondary/20 bg-surface-container-high px-2.5 py-1 font-mono text-xs text-secondary">IPC Multi-Process</span>
+          <span class="rounded border border-tertiary/20 bg-surface-container-high px-2.5 py-1 font-mono text-xs text-tertiary">Low-Latency Relay</span>
+        </div>
+      </div>
+
+      <div class="flex flex-col justify-between bg-slate-50 p-6 sm:p-8 lg:w-5/12 dark:bg-surface-container">
+        <div>
+          <div class="mb-2 flex items-center gap-2">
+            <span class="rounded-full border border-emerald-600/25 bg-emerald-600/10 px-2 py-0.5 font-mono text-[11px] font-semibold uppercase text-emerald-700 dark:border-primary/30 dark:bg-primary/10 dark:text-primary">
+              {featured.kicker}
+            </span>
+            <span class="font-mono text-[11px] text-slate-600 dark:text-on-surface-variant">Desktop + Hardware</span>
+          </div>
+          <h3 class="mb-1 text-2xl font-bold text-slate-900 dark:text-white">{featured.title}</h3>
+          <p class="mb-3 text-sm font-medium text-sky-700 dark:text-secondary">{featured.subtitle}</p>
+          <p class="mb-5 text-xs leading-relaxed text-slate-600 sm:text-sm dark:text-on-surface-variant">
+            {featured.description}
+          </p>
+          <div class="mb-6 flex flex-wrap gap-1.5">
+            {
+              featured.tech.map((t) => (
+                <span class="rounded border border-slate-300 bg-slate-200/70 px-2 py-1 font-mono text-xs text-slate-700 dark:border-surface-container-highest dark:bg-surface-container-high dark:text-white">
+                  {t}
+                </span>
+              ))
+            }
+          </div>
+        </div>
+        <div class="flex flex-wrap items-center gap-3 pt-2">
+          <a
+            href={featured.codeUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 rounded-xl bg-primary px-4 py-2.5 text-xs font-semibold text-on-primary shadow-md transition-all hover:bg-primary-fixed sm:text-sm"
+          >
+            <Icon name="code" size={18} />
+            <span>Ver Repositorio GitHub</span>
+            <Icon name="arrow-up-right" size={14} />
+          </a>
+          <span class="flex items-center gap-1 font-mono text-xs text-slate-600 dark:text-on-surface-variant">
+            <Icon name="verified" size={16} class="text-emerald-600 dark:text-primary" />
+            {featured.badge}
+          </span>
+        </div>
+      </div>
+    </article>
+
+    {/* ── Proyectos secundarios / placeholders ───────────────────── */}
+    {
+      rest.map((p, i) => (
+        <article
+          class="reveal flex flex-col justify-between rounded-xl border border-slate-200 bg-white p-5 shadow-lg transition-all hover:bg-slate-50 sm:p-6 lg:col-span-4 dark:border-surface-container-high dark:bg-surface-container-low dark:hover:bg-surface-container"
+          style={`--reveal-delay: ${i * 90}ms`}
+        >
+          <div>
+            <div class="relative mb-4 flex h-36 flex-col justify-between overflow-hidden rounded-lg border border-slate-200 bg-slate-100 p-4 dark:border-surface-container-high dark:bg-surface-container">
+              <div class="flex items-center justify-between">
+                <span class={`h-2 w-2 rounded-full ${dotColor[p.kickerColor]}`} />
+                <span class="font-mono text-xs text-slate-600 dark:text-on-surface-variant">
+                  {i === 0 ? 'saas-flow.v1' : i === 1 ? 'telemetry.api' : 'storefront.prod'}
+                </span>
+              </div>
+              {i === 0 && (
+                <div class="flex items-center gap-3">
+                  <div class="flex h-10 w-10 items-center justify-center rounded border border-sky-600/25 bg-sky-600/10 text-sky-600 dark:border-secondary/30 dark:bg-secondary-container/20 dark:text-secondary">
+                    <Icon name="task" size={20} />
+                  </div>
+                  <div>
+                    <div class="mb-1.5 h-2 w-28 rounded bg-slate-300 dark:bg-surface-container-high" />
+                    <div class="h-2 w-16 rounded bg-slate-300 dark:bg-surface-container-high" />
+                  </div>
+                </div>
+              )}
+              {i === 1 && (
+                <div class="flex h-12 items-end gap-1.5">
+                  <span class="w-full rounded-t-sm bg-indigo-400/40 h-[40%] dark:bg-tertiary/30" />
+                  <span class="w-full rounded-t-sm bg-indigo-400/60 h-[75%] dark:bg-tertiary/50" />
+                  <span class="w-full rounded-t-sm bg-indigo-400/50 h-[50%] dark:bg-tertiary/40" />
+                  <span class="w-full rounded-t-sm bg-indigo-500/70 h-[90%] dark:bg-tertiary/70" />
+                  <span class="w-full rounded-t-sm bg-indigo-500/60 h-[60%] dark:bg-tertiary/60" />
+                  <span class="w-full rounded-t-sm bg-indigo-500 h-full dark:bg-tertiary" />
+                </div>
+              )}
+              {i === 2 && (
+                <div class="grid grid-cols-2 gap-2">
+                  <div class="flex h-12 items-center justify-center rounded bg-slate-200 text-slate-500 dark:bg-surface-container-high dark:text-on-surface-variant">
+                    <Icon name="bag" size={20} />
+                  </div>
+                  <div class="flex h-12 items-center justify-center rounded bg-slate-200 text-slate-500 dark:bg-surface-container-high dark:text-on-surface-variant">
+                    <Icon name="card" size={20} />
+                  </div>
+                </div>
+              )}
+              <div class="flex items-center justify-between font-mono text-[11px] text-slate-600 dark:text-on-surface-variant">
+                <span>{i === 0 ? '99.9% Uptime' : i === 1 ? 'Latency < 25ms' : '100 Lighthouse'}</span>
+                <span>{i === 0 ? 'Docker Clustered' : i === 1 ? 'Redis PubSub' : 'Edge Rendered'}</span>
+              </div>
+            </div>
+            <span class={`font-mono text-[11px] font-semibold uppercase tracking-wider ${kickerColor[p.kickerColor]}`}>
+              {p.kicker}
+            </span>
+            <h3 class="mt-1 text-xl font-bold text-slate-900 dark:text-white">{p.title}</h3>
+            <p class="mb-2 text-xs font-medium text-slate-600 dark:text-on-surface-variant">{p.subtitle}</p>
+            <p class="mb-4 text-xs leading-relaxed text-slate-600 sm:text-sm dark:text-on-surface-variant">{p.description}</p>
+            <div class="mb-4 flex flex-wrap gap-1.5">
+              {p.tech.map((t) => (
+                <span class="rounded bg-slate-200/80 px-2 py-0.5 font-mono text-xs text-slate-700 dark:bg-surface-container-high dark:text-white">{t}</span>
+              ))}
+            </div>
+            {p.placeholder && (
+              <p class="mb-3 rounded-lg border border-dashed border-slate-300 bg-slate-100 px-2.5 py-1.5 font-mono text-[11px] text-slate-600 dark:border-surface-container-high dark:bg-surface-container-lowest/60 dark:text-on-surface-variant">
+                Placeholder — reemplázame con tu proyecto real.
+              </p>
+            )}
+          </div>
+          <div class="flex items-center justify-between border-t border-slate-200 pt-3 dark:border-surface-container-high/60">
+            <a
+              href={p.codeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-1 text-xs font-semibold text-emerald-700 transition-colors hover:text-emerald-600 dark:text-primary dark:hover:text-primary-fixed"
+            >
+              <Icon name="code" size={16} />
+              <span>Código</span>
+            </a>
+            {p.demoUrl && (
+              <a
+                href={p.demoUrl}
+                class="inline-flex items-center gap-1 text-xs font-semibold text-sky-700 transition-colors hover:text-sky-600 dark:text-secondary dark:hover:text-secondary-fixed"
+              >
+                <span>{p.demoLabel}</span>
+                <Icon name="arrow-up-right" size={14} />
+              </a>
+            )}
+          </div>
+        </article>
+      ))
+    }
+  </div>
+</section>

@@ -1,0 +1,111 @@
+---
+import Icon from './Icon.astro';
+
+const features = [
+  {
+    icon: 'monitor',
+    tint: 'primary',
+    title: 'Fullstack & Desktop Apps',
+    text: 'Software nativo multiplataforma con Electron e interfaces web reactivas con Next.js y React.'
+  },
+  {
+    icon: 'cpu',
+    tint: 'secondary',
+    title: 'Hardware & IoT Integration',
+    text: 'Puentes de comunicación entre microcontroladores Arduino, biometría, torniquetes y software de control.'
+  },
+  {
+    icon: 'cloud-sync',
+    tint: 'plain',
+    title: 'Cloud & Contenedores',
+    text: 'Containerización uniforme con Docker, orquestación, despliegues escalables y servicios en AWS.'
+  },
+  {
+    icon: 'architecture',
+    tint: 'tertiary',
+    title: 'Clean Code & Patrones',
+    text: 'Patrones de diseño desacoplados, separación de responsabilidades, APIs RESTful y pipelines de CI/CD.'
+  }
+];
+
+const tintBox: Record<string, string> = {
+  primary: 'border-emerald-600/25 bg-emerald-600/10 text-emerald-600 dark:border-primary/30 dark:bg-primary-container/20 dark:text-primary',
+  secondary: 'border-sky-600/25 bg-sky-600/10 text-sky-600 dark:border-secondary/30 dark:bg-secondary-container/20 dark:text-secondary',
+  tertiary: 'border-indigo-500/25 bg-indigo-500/10 text-indigo-500 dark:border-tertiary/30 dark:bg-tertiary-container/20 dark:text-tertiary',
+  plain: 'border-slate-300 bg-slate-200/70 text-sky-600 dark:border-surface-container-high dark:bg-surface-container-highest dark:text-secondary'
+};
+---
+
+<section id="sobre-mi" class="relative z-10 mx-auto w-full max-w-max-container scroll-mt-24 px-margin-mobile py-16 lg:px-margin-desktop lg:py-24">
+  <div class="reveal mb-10 flex flex-col gap-1">
+    <span class="font-mono text-xs font-semibold uppercase tracking-widest text-emerald-600 dark:text-primary">01. / Trayectoria</span>
+    <h2 class="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl lg:text-4xl dark:text-white">
+      Sobre Mí &amp; Filosofía de Desarrollo
+    </h2>
+    <p class="mt-1 max-w-2xl text-sm text-slate-600 sm:text-base dark:text-on-surface-variant">
+      Integrando hardware físico, aplicaciones de escritorio reactivas y ecosistemas en la nube.
+    </p>
+  </div>
+
+  <div class="grid grid-cols-1 items-stretch gap-6 lg:grid-cols-12">
+    <div class="reveal flex flex-col justify-between rounded-xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8 lg:col-span-7 dark:border-surface-container-high dark:bg-surface-container-low">
+      <div class="space-y-4 text-sm leading-relaxed text-slate-600 sm:text-base dark:text-on-surface-variant">
+        <p>
+          Soy estudiante de <strong class="font-semibold text-slate-900 dark:text-white">Ingeniería de Software</strong>
+          y desarrollador radicado en <span class="font-medium text-sky-700 dark:text-secondary">Cúcuta, Colombia</span>.
+          Mi fascinación por la tecnología se centra en el espectro completo del desarrollo informático:
+          desde la precisión a bajo nivel de la electrónica y microcontroladores, hasta arquitecturas de
+          software distribuidas.
+        </p>
+        <p>
+          Cuento con amplia experiencia diseñando aplicaciones de escritorio con
+          <strong class="font-semibold text-emerald-700 dark:text-primary">Electron</strong> y
+          <strong class="font-semibold text-slate-900 dark:text-white">Node.js</strong>, capaces de interactuar en tiempo
+          real con periféricos y sensores <strong class="font-semibold text-indigo-600 dark:text-tertiary">Arduino</strong>
+          mediante comunicación serial IPC directa. Al mismo tiempo, construyo plataformas web accesibles
+          y ultra optimizadas con <strong class="font-semibold text-sky-700 dark:text-secondary">Next.js</strong> y
+          <strong class="font-semibold text-slate-900 dark:text-white">TypeScript</strong>.
+        </p>
+        <p>
+          Mi enfoque es rigurosamente pragmático: priorizo el rendimiento medible, el código limpio y
+          desacoplado, la resiliencia en despliegues con
+          <strong class="font-semibold text-slate-900 dark:text-white">Docker / AWS</strong> y, sobre todo, una experiencia
+          de uso impecable y confiable.
+        </p>
+      </div>
+      <div class="mt-6 grid grid-cols-3 gap-3 rounded-xl border border-slate-200 bg-slate-100 p-4 pt-6 dark:border-surface-container-high/60 dark:bg-surface-container">
+        <div class="flex flex-col">
+          <span class="font-mono text-xl font-bold text-emerald-600 sm:text-2xl dark:text-primary">100%</span>
+          <span class="font-mono text-[11px] uppercase tracking-wider text-slate-500 dark:text-on-surface-variant">Clean Code</span>
+        </div>
+        <div class="flex flex-col">
+          <span class="font-mono text-xl font-bold text-sky-600 sm:text-2xl dark:text-secondary">IoT + IPC</span>
+          <span class="font-mono text-[11px] uppercase tracking-wider text-slate-500 dark:text-on-surface-variant">Hardware I/O</span>
+        </div>
+        <div class="flex flex-col">
+          <span class="font-mono text-xl font-bold text-indigo-500 sm:text-2xl dark:text-tertiary">Cloud</span>
+          <span class="font-mono text-[11px] uppercase tracking-wider text-slate-500 dark:text-on-surface-variant">Docker / CI</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:col-span-5 lg:grid-cols-1">
+      {
+        features.map((f, i) => (
+          <div
+            class="reveal flex items-start gap-4 rounded-xl border border-slate-200 bg-white p-5 transition-all hover:bg-slate-50 dark:border-surface-container-high dark:bg-surface-container-low dark:hover:bg-surface-container"
+            style={`--reveal-delay: ${i * 90}ms`}
+          >
+            <div class={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border ${tintBox[f.tint]}`}>
+              <Icon name={f.icon} size={22} />
+            </div>
+            <div class="flex flex-col">
+              <h3 class="mb-1 text-base font-semibold text-slate-900 dark:text-white">{f.title}</h3>
+              <p class="text-xs text-slate-600 sm:text-sm dark:text-on-surface-variant">{f.text}</p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

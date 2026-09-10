@@ -1,0 +1,14 @@
+# build output
+dist/
+.astro/
+# dependencies
+node_modules/
+# logs
+*.log
+# OS
+.DS_Store
+Thumbs.db
+# env (no se usa backend, pero se ignora por seguridad)
+.env
+.env.*
+!.env.example
