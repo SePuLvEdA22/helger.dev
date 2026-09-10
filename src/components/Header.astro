@@ -44,12 +44,6 @@ const ICON_BTN =
         <span class="truncate font-display text-lg font-bold tracking-tight text-slate-900 dark:text-white">{site.brand}</span>
         <span class="truncate font-mono text-[11px] text-emerald-600/90 dark:text-primary/80">Systems Architect</span>
       </span>
-      <span
-        class="ml-2 hidden shrink-0 items-center gap-1.5 rounded-full border border-slate-200 bg-slate-100 px-2.5 py-1 min-[1400px]:flex dark:border-surface-container-high dark:bg-surface-container-low"
-      >
-        <span class="h-2 w-2 animate-pulse rounded-full bg-emerald-500 dark:bg-primary"></span>
-        <span class="whitespace-nowrap font-mono text-[11px] tracking-wide text-emerald-700 dark:text-primary">Disponible para proyectos</span>
-      </span>
     </a>
 
     {/* Nav desktop solo en xl: en lg (1024–1280px) brand + 5 links + acciones no caben */}
@@ -149,30 +143,56 @@ const ICON_BTN =
       a.addEventListener('click', () => setMenu(false));
     });
 
-    // Scroll-spy solo para la nav desktop: alterna clases de estado
-    // sin tocar las clases base de layout.
+    // Scroll-spy con IntersectionObserver: marca la sección que cruza la
+    // banda central del viewport. A diferencia del cálculo con offsetTop,
+    // funciona también con la última sección aunque el pie de página sea
+    // más bajo que el viewport (caso Contacto).
     const activeClasses = ACTIVE.split(' ');
     const inactiveClasses = INACTIVE.split(' ');
-    const navLinks = document.querySelectorAll('header nav[aria-label="Navegación principal"] a.nav-item');
-    const sections = document.querySelectorAll('main section[id]');
-    const onScroll = () => {
-      let current = '';
-      const pos = window.scrollY + 180;
-      sections.forEach((s) => {
-        if (pos >= s.offsetTop && pos < s.offsetTop + s.offsetHeight) {
-          current = s.getAttribute('id') || '';
-        }
-      });
+    const navLinks = Array.from(
+      document.querySelectorAll('header nav[aria-label="Navegación principal"] a.nav-item')
+    );
+    const setActive = (path) => {
       navLinks.forEach((link) => {
-        const path = link.getAttribute('data-path') || (link.getAttribute('href') || '').replace('#', '');
-        const isActive = path === current;
+        const linkPath = link.getAttribute('data-path') || (link.getAttribute('href') || '').replace('#', '');
+        const isActive = linkPath === path;
         link.classList.remove(...(isActive ? inactiveClasses : activeClasses));
         link.classList.add(...(isActive ? activeClasses : inactiveClasses));
         if (isActive) link.setAttribute('aria-current', 'page');
         else link.removeAttribute('aria-current');
       });
     };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
+    // Feedback inmediato al hacer click, sin esperar al scroll suave.
+    navLinks.forEach((link) => {
+      link.addEventListener('click', () => {
+        setActive(link.getAttribute('data-path') || (link.getAttribute('href') || '').replace('#', ''));
+      });
+    });
+    const sections = document.querySelectorAll('main section[id]');
+    if ('IntersectionObserver' in window && sections.length > 0) {
+      const spy = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) setActive(entry.target.getAttribute('id') || '');
+          });
+        },
+        { rootMargin: '-40% 0px -55% 0px', threshold: 0 }
+      );
+      sections.forEach((s) => spy.observe(s));
+    } else {
+      // Fallback sin IntersectionObserver: primera sección visible.
+      const onScroll = () => {
+        let current = '';
+        const pos = window.scrollY + 180;
+        sections.forEach((s) => {
+          if (pos >= s.offsetTop && pos < s.offsetTop + s.offsetHeight) {
+            current = s.getAttribute('id') || '';
+          }
+        });
+        if (current) setActive(current);
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    }
   });
 </script>
