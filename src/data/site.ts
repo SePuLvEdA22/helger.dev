@@ -84,6 +84,18 @@ export const projects: Project[] = [
     codeUrl: 'https://github.com/SePuLvEdA22/serene-boutique',
     demoUrl: 'https://serene-boutique.vercel.app',
     demoLabel: 'Ver Demo'
+  },
+  {
+    kicker: 'Web Interactiva',
+    kickerColor: 'secondary',
+    title: 'Portfolio XP',
+    subtitle: 'Portafolio interactivo estilo Windows XP',
+    description:
+      'Portafolio web con estética de Windows XP: escritorio con iconos clásicos, ventanas arrastrables, barra de tareas y menú inicio funcionales. Construido con React 19 y Vite.',
+    tech: ['React', 'Vite', 'JavaScript', 'CSS'],
+    codeUrl: 'https://github.com/SePuLvEdA22/portfolio',
+    demoUrl: 'https://portafolioxp.vercel.app/',
+    demoLabel: 'Ver Demo'
   }
 ];
 
