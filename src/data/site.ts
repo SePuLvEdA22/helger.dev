@@ -54,7 +54,7 @@ export const projects: Project[] = [
   {
     kicker: 'Web Application',
     kickerColor: 'secondary',
-    title: 'RH Events',
+    title: 'RH Eventos',
     subtitle: 'Landing Moderna de Eventos & Responsive',
     description:
       'Landing profesional para servicios de eventos con galería interactiva, testimonios y formulario de contacto. Construida con React 18, Vite 5, Tailwind CSS y Lucide, optimizada para todos los dispositivos.',
