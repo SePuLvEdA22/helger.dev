@@ -59,7 +59,9 @@ export const projects: Project[] = [
     description:
       'Landing profesional para servicios de eventos con galería interactiva, testimonios y formulario de contacto. Construida con React 18, Vite 5, Tailwind CSS y Lucide, optimizada para todos los dispositivos.',
     tech: ['React', 'Vite', 'Tailwind', 'JavaScript'],
-    codeUrl: 'https://github.com/SePuLvEdA22/rh-events'
+    codeUrl: 'https://github.com/SePuLvEdA22/rh-events',
+    demoUrl: 'https://rheventos.vercel.app/',
+    demoLabel: 'Ver Demo'
   },
   {
     kicker: 'Mobile App / Finanzas',
