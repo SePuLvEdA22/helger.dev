@@ -1,4 +1,7 @@
 ---
+import '@fontsource-variable/space-grotesk';
+import '@fontsource-variable/inter-tight';
+import '@fontsource-variable/jetbrains-mono';
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
@@ -21,7 +24,7 @@ const personJsonLd = {
   jobTitle: `${site.role} ${site.roleSuffix}`,
   address: { '@type': 'PostalAddress', addressLocality: 'Cúcuta', addressCountry: 'CO' },
   url: site.url,
-  email: `mailto:${site.email}`,
+  email: site.email,
   sameAs
 };
 ---
@@ -35,7 +38,7 @@ const personJsonLd = {
     <meta name="description" content={description} />
     <meta name="author" content={site.name} />
     <link rel="canonical" href={canonicalURL} />
-    <meta name="theme-color" content="#0b1326" />
+    <meta name="theme-color" content="#131210" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="es_CO" />
     <meta property="og:url" content={canonicalURL} />
@@ -48,12 +51,11 @@ const personJsonLd = {
     <meta name="twitter:image" content={ogImageURL} />
     <script type="application/ld+json" set:html={JSON.stringify(personJsonLd)} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
+    <noscript>
+      <style>
+        [data-hero], .reveal { opacity: 1 !important; transform: none !important; }
+      </style>
+    </noscript>
     <script is:inline>
       // Aplica el tema guardado antes del primer pintado (evita flash). Dark por defecto.
       try {
@@ -64,12 +66,12 @@ const personJsonLd = {
     </script>
   </head>
   <body
-    class="min-h-screen bg-slate-100 text-slate-900 antialiased dark:bg-surface dark:text-on-surface"
+    class="min-h-screen bg-[#f6f3ec] text-stone-900 antialiased dark:bg-surface dark:text-on-surface"
   >
     <div class="ambient-glow pointer-events-none fixed inset-0 z-0" aria-hidden="true"></div>
     <a
       href="#contenido"
-      class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-lg focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-slate-900 dark:focus:bg-surface-container-high dark:focus:text-white"
+      class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-lg focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-stone-900 dark:focus:bg-surface-container-high dark:focus:text-white"
     >
       Saltar al contenido
     </a>
@@ -162,6 +164,32 @@ const personJsonLd = {
           } catch {}
         });
       });
+    </script>
+
+    <script>
+      import { animate, scroll, stagger } from 'motion';
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduced) {
+        document.querySelectorAll('[data-hero]').forEach((el) => {
+          (el as HTMLElement).style.opacity = '1';
+          (el as HTMLElement).style.transform = 'none';
+        });
+      } else {
+        const heroEls = document.querySelectorAll('[data-hero]');
+        if (heroEls.length > 0) {
+          animate(
+            heroEls,
+            { opacity: 1, y: 0 },
+            { duration: 0.7, delay: stagger(0.09), ease: [0.22, 1, 0.36, 1] }
+          );
+        }
+        const bar = document.getElementById('scroll-progress');
+        if (bar) {
+          scroll((progress) => {
+            bar.style.transform = `scaleX(${progress})`;
+          });
+        }
+      }
     </script>
   </body>
 </html>

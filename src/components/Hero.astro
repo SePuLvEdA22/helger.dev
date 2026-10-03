@@ -2,19 +2,17 @@
 import Icon from './Icon.astro';
 import { site } from '../data/site';
 
-const jsonPretty = JSON.stringify(
-  {
-    developer: 'Helger Santiago',
-    role: 'Software Engineer & Architect',
-    status: 'Available',
-    location: 'Cúcuta, Colombia',
-    core: ['JavaScript', 'Electron', 'Next.js', 'Node.js'],
-    cloud_and_ops: ['Docker', 'AWS', 'CI/CD'],
-    hardware_io: ['Arduino', 'IoT Controllers']
-  },
-  null,
-  2
-);
+const profile = {
+  developer: 'Helger Santiago',
+  role: 'Software Engineer & Architect',
+  status: 'Available',
+  location: 'Cúcuta, Colombia',
+  core: ['JavaScript', 'Electron', 'Next.js', 'Node.js'],
+  cloud_and_ops: ['Docker', 'AWS', 'CI/CD'],
+  hardware_io: ['Arduino', 'IoT Controllers'],
+};
+
+const jsonPretty = JSON.stringify(profile, null, 2);
 ---
 
 <section
@@ -29,8 +27,8 @@ const jsonPretty = JSON.stringify(
     <svg class="h-full w-full" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <pattern id="matrix-grid" width="48" height="48" patternUnits="userSpaceOnUse">
-          <path d="M 48 0 L 0 0 0 48" fill="none" stroke="rgba(5, 150, 105, 0.25)" stroke-width="1"></path>
-          <circle cx="0" cy="0" fill="rgba(2, 132, 199, 0.45)" r="1.5"></circle>
+          <path d="M 48 0 L 0 0 0 48" fill="none" stroke="rgba(194, 65, 12, 0.28)" stroke-width="1"></path>
+          <circle cx="0" cy="0" fill="rgba(87, 83, 78, 0.5)" r="1.5"></circle>
         </pattern>
       </defs>
       <rect width="100%" height="100%" fill="url(#matrix-grid)"></rect>
@@ -39,63 +37,63 @@ const jsonPretty = JSON.stringify(
 
   <div class="relative grid min-w-0 max-w-full grid-cols-1 items-center gap-6 lg:grid-cols-12">
     <div class="flex min-w-0 flex-col items-start gap-4 lg:col-span-7">
-      <div class="reveal flex flex-wrap items-center gap-2">
+      <div class="flex flex-wrap items-center gap-2" data-hero>
         <div
-          class="inline-flex items-center gap-2 rounded-full border border-emerald-600/30 bg-white px-3 py-1 shadow-sm dark:border-primary/30 dark:bg-surface-container-high/80"
+          class="inline-flex items-center gap-2 rounded-full border border-orange-700/30 bg-white px-3 py-1 shadow-sm dark:border-primary/30 dark:bg-surface-container-high/80"
         >
           <span class="relative flex h-2.5 w-2.5">
-            <span class="absolute h-full w-full animate-ping rounded-full bg-emerald-500 opacity-75 dark:bg-primary"></span>
-            <span class="h-2 w-2 rounded-full bg-emerald-500 dark:bg-primary"></span>
+            <span class="absolute h-full w-full animate-ping rounded-full bg-orange-600 opacity-75 dark:bg-primary"></span>
+            <span class="h-2 w-2 rounded-full bg-orange-600 dark:bg-primary"></span>
           </span>
-          <span class="font-mono text-[11px] font-semibold uppercase tracking-wider text-emerald-700 dark:text-primary">
+          <span class="font-mono text-[11px] font-semibold uppercase tracking-wider text-orange-800 dark:text-primary">
             {site.availability}
           </span>
         </div>
         <div
-          class="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 py-1 font-mono text-xs text-slate-600 dark:border-surface-container-high dark:bg-surface-container dark:text-on-surface-variant"
+          class="inline-flex items-center gap-1.5 rounded-full border border-stone-200 bg-white px-3 py-1 font-mono text-xs text-stone-600 dark:border-surface-container-high dark:bg-surface-container dark:text-on-surface-variant"
         >
-          <Icon name="map-pin" size={15} class="text-sky-600 dark:text-secondary" />
+          <Icon name="map-pin" size={15} class="text-stone-600 dark:text-secondary" />
           <span>{site.location}</span>
         </div>
       </div>
 
-      <div class="reveal mt-2 flex flex-col gap-2" style="--reveal-delay: 80ms">
-        <span class="text-xl font-medium tracking-tight text-slate-600 md:text-2xl dark:text-on-surface-variant">
-          Hola, soy <span class="font-bold text-slate-900 dark:text-white">{site.name}</span>
+      <div class="mt-2 flex flex-col gap-2" data-hero>
+        <span class="text-xl font-medium tracking-tight text-stone-600 md:text-2xl dark:text-on-surface-variant">
+          Hola, soy <span class="font-bold text-stone-900 dark:text-white">{site.name}</span>
         </span>
         <h1
-          class="text-4xl font-extrabold leading-[1.1] tracking-tight text-slate-900 sm:text-5xl lg:text-6xl dark:text-white"
+          class="text-4xl font-extrabold leading-[1.1] tracking-tight text-stone-900 sm:text-5xl lg:text-6xl dark:text-white"
         >
-          <span class="bg-gradient-to-r from-emerald-600 via-sky-600 to-indigo-500 bg-clip-text text-transparent dark:from-primary dark:via-secondary dark:to-tertiary">
+          <span class="bg-gradient-to-r from-orange-700 via-stone-600 to-amber-800 bg-clip-text text-transparent dark:from-primary dark:via-secondary dark:to-tertiary">
             {site.role}
           </span>
           {' '}{site.roleSuffix}
         </h1>
       </div>
 
-      <p class="reveal max-w-2xl text-base leading-relaxed text-slate-600 sm:text-lg dark:text-on-surface-variant" style="--reveal-delay: 160ms">
+      <p class="max-w-2xl text-base leading-relaxed text-stone-600 sm:text-lg dark:text-on-surface-variant" data-hero>
         {site.tagline}
       </p>
 
-      <div class="reveal flex w-full flex-wrap items-center gap-3 pt-2 sm:w-auto" style="--reveal-delay: 240ms">
+      <div class="flex w-full flex-wrap items-center gap-3 pt-2 sm:w-auto" data-hero>
         <a
           href="#proyectos"
-          class="inline-flex min-h-[44px] transform items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-on-primary shadow-lg shadow-primary/25 transition-all hover:-translate-y-0.5 hover:bg-primary-fixed"
+          class="inline-flex min-h-[44px] transform items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-on-primary shadow-lg shadow-primary/25 transition-all hover:-transtone-y-0.5 hover:bg-primary-fixed"
         >
           <span>Ver proyectos</span>
           <Icon name="arrow-down" size={18} />
         </a>
         <a
           href="#contacto"
-          class="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white px-6 py-3 text-sm font-medium text-slate-900 shadow-sm transition-all hover:bg-slate-100 dark:border-surface-container-high dark:bg-surface-container dark:text-white dark:hover:bg-surface-container-high"
+          class="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl border border-stone-300 bg-white px-6 py-3 text-sm font-medium text-stone-900 shadow-sm transition-all hover:bg-stone-100 dark:border-surface-container-high dark:bg-surface-container dark:text-white dark:hover:bg-surface-container-high"
         >
-          <Icon name="send" size={18} class="text-sky-600 dark:text-secondary" />
+          <Icon name="send" size={18} class="text-stone-600 dark:text-secondary" />
           <span>Contactarme</span>
         </a>
         <a
           href={site.cvUrl}
           download
-          class="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl border border-emerald-600/30 bg-emerald-600/10 px-6 py-3 text-sm font-semibold text-emerald-700 transition-all hover:bg-emerald-500 hover:text-white dark:border-primary/40 dark:bg-primary/15 dark:text-primary dark:hover:bg-primary dark:hover:text-on-primary"
+          class="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl border border-orange-700/30 bg-orange-700/10 px-6 py-3 text-sm font-semibold text-orange-800 transition-all hover:bg-orange-600 hover:text-white dark:border-primary/40 dark:bg-primary/15 dark:text-primary dark:hover:bg-primary dark:hover:text-on-primary"
         >
           <Icon name="arrow-down" size={18} />
           <span>Descargar CV</span>
@@ -104,7 +102,7 @@ const jsonPretty = JSON.stringify(
           href={site.github}
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white px-4 py-3 font-mono text-xs text-slate-600 transition-all hover:bg-slate-100 hover:text-emerald-700 dark:border-surface-container-high/60 dark:bg-surface-container-low dark:text-on-surface-variant dark:hover:bg-surface-container dark:hover:text-primary"
+          class="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl border border-stone-300 bg-white px-4 py-3 font-mono text-xs text-stone-600 transition-all hover:bg-stone-100 hover:text-orange-800 dark:border-surface-container-high/60 dark:bg-surface-container-low dark:text-on-surface-variant dark:hover:bg-surface-container dark:hover:text-primary"
         >
           <Icon name="terminal" size={18} />
           <span>{site.githubHandle}</span>
@@ -114,7 +112,7 @@ const jsonPretty = JSON.stringify(
     </div>
 
     {/* Consola: se mantiene oscura en ambos modos como widget de terminal */}
-    <div class="reveal mt-8 w-full min-w-0 lg:col-span-5 lg:mt-0" style="--reveal-delay: 200ms">
+    <div class="mt-8 w-full min-w-0 lg:col-span-5 lg:mt-0" data-hero>
       <div
         class="relative max-w-full overflow-hidden rounded-xl border border-surface-container-high bg-surface-container-low shadow-2xl"
       >
@@ -124,7 +122,7 @@ const jsonPretty = JSON.stringify(
           <div class="flex items-center gap-2">
             <span class="inline-block h-3 w-3 rounded-full bg-rose-500"></span>
             <span class="inline-block h-3 w-3 rounded-full bg-amber-500"></span>
-            <span class="inline-block h-3 w-3 rounded-full bg-emerald-500"></span>
+            <span class="inline-block h-3 w-3 rounded-full bg-orange-600"></span>
             <span class="ml-2 font-mono text-xs text-on-surface-variant">devcore.config.json</span>
           </div>
           <div class="flex items-center gap-2 text-on-surface-variant">
@@ -134,24 +132,24 @@ const jsonPretty = JSON.stringify(
         </div>
         <div class="terminal-scroll overflow-x-auto bg-[#080e1a] p-4 font-mono text-[12px] leading-relaxed sm:p-5 sm:text-[13px]">
           <pre class="w-max min-w-full pr-4 text-on-surface"><span class="text-tertiary">{'{'}</span>
-  <span class="text-secondary">"developer"</span>: <span class="text-primary-fixed">"Helger Santiago"</span>,
-  <span class="text-secondary">"role"</span>: <span class="text-primary-fixed">"Software Engineer &amp; Architect"</span>,
-  <span class="text-secondary">"status"</span>: <span class="text-primary">"Available"</span>,
-  <span class="text-secondary">"location"</span>: <span class="text-primary-fixed">"Cúcuta, Colombia"</span>,
+  <span class="text-secondary">"developer"</span>: <span class="text-primary-fixed">"{profile.developer}"</span>,
+  <span class="text-secondary">"role"</span>: <span class="text-primary-fixed">"{profile.role}"</span>,
+  <span class="text-secondary">"status"</span>: <span class="text-primary">"{profile.status}"</span>,
+  <span class="text-secondary">"location"</span>: <span class="text-primary-fixed">"{profile.location}"</span>,
   <span class="text-secondary">"core"</span>: [
-    <span class="text-primary">"JavaScript"</span>,
-    <span class="text-primary">"Electron"</span>,
-    <span class="text-primary">"Next.js"</span>,
-    <span class="text-primary">"Node.js"</span>
+    {profile.core.map((tech, i) => (
+      <><span class="text-primary">"{tech}"</span>{i < profile.core.length - 1 ? ',' : ''}{'\n    '}</>
+    ))}
   ],
   <span class="text-secondary">"cloud_and_ops"</span>: [
-    <span class="text-secondary">"Docker"</span>,
-    <span class="text-secondary">"AWS"</span>,
-    <span class="text-secondary">"CI/CD"</span>
+    {profile.cloud_and_ops.map((tech, i) => (
+      <><span class="text-secondary">"{tech}"</span>{i < profile.cloud_and_ops.length - 1 ? ',' : ''}{'\n    '}</>
+    ))}
   ],
   <span class="text-secondary">"hardware_io"</span>: [
-    <span class="text-tertiary">"Arduino"</span>,
-    <span class="text-tertiary">"IoT Controllers"</span>
+    {profile.hardware_io.map((tech, i) => (
+      <><span class="text-tertiary">"{tech}"</span>{i < profile.hardware_io.length - 1 ? ',' : ''}{'\n    '}</>
+    ))}
   ]<span class="cursor-blink text-primary"> ▊</span>
 <span class="text-tertiary">{'}'}</span></pre>
         </div>

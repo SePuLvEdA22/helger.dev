@@ -11,7 +11,10 @@ dark mode por defecto, acentos esmeralda/cian/índigo, bento grid, terminal JSON
 - Tailwind CSS v4 vía plugin oficial `@tailwindcss/vite` (tokens del diseño en `src/styles/global.css`
   con `@theme`; `@astrojs/tailwind` está deprecado y no soporta Astro 7)
 - Sin frameworks de UI (cero React/Vue). Iconos SVG inline estilo Lucide, sin imágenes de stock
-- Animación fade-in al hacer scroll con `IntersectionObserver` (CSS + ~20 líneas de JS, sin librerías)
+- Tipografías self-hosted con Fontsource variable: `Space Grotesk` (display), `Inter Tight` (body),
+  `JetBrains Mono` (mono). Sin Google Fonts = sin trackers ni FOUT externo
+- Animación con `motion` (vanilla JS): entrada del Hero con stagger, barra de progreso de scroll
+  y reveal on scroll. Respeta `prefers-reduced-motion` y funciona sin JS (fallback `noscript`)
 - Dark mode por defecto con toggle a light mode (persistido en `localStorage`)
 
 ## Estructura
@@ -19,13 +22,13 @@ dark mode por defecto, acentos esmeralda/cian/índigo, bento grid, terminal JSON
 ```
 portfolio/
 ├── astro.config.mjs        # output: 'static'
-├── tailwind.config.mjs     # tokens del diseño (surface, primary, secondary…)
 ├── src/
-│   ├── data/site.ts        # ★ PERSONALIZA AQUÍ: enlaces, email, proyectos, skills
+│   ├── data/site.ts        # ★ PERSONALIZA AQUÍ: enlaces, email, proyectos, skills, servicios, proceso, FAQ
+│   ├── utils/accent.ts     # tokens de acento compartidos (primary/secondary/tertiary)
 │   ├── layouts/BaseLayout.astro
-│   ├── components/         # Header, Hero, About, Projects, Skills, Contact, Footer, Icon
-│   ├── pages/index.astro   # Hero + Sobre mí + Proyectos + Habilidades + Contacto
-│   └── styles/global.css   # base, scrollbar, reveal-on-scroll, light mode
+│   ├── components/         # Header, Hero, Services, About, Projects, Skills, Faq, Contact, Footer, Icon
+│   ├── pages/index.astro   # Hero + Servicios + Proyectos + Sobre mí + Habilidades + FAQ + Contacto
+│   └── styles/global.css   # tokens @theme, base, scrollbar, reveal-on-scroll, light mode
 └── public/favicon.svg
 ```
 
@@ -44,15 +47,18 @@ Otros scripts:
 ```bash
 npm run build    # genera ./dist (estático puro)
 npm run preview  # sirve ./dist en local para verificar
+npm run check    # chequeo de tipos Astro + TypeScript
 ```
 
 ## Personalizar
 
 1. **Contacto:** edita `src/data/site.ts` → `github`, `linkedin` (actualmente `#`), `email`.
-2. **Proyectos:** edita el arreglo `projects` en el mismo archivo. El primero es **BodyFitGym**
-   (`https://github.com/SePuLvEdA22/software_gym`); los otros 3 llevan `placeholder: true` como
-   recordatorio — reemplázalos (ej. tu tienda online en Next.js) y quita el flag.
+2. **Proyectos:** edita el arreglo `projects` en el mismo archivo. Actualmente hay 5 proyectos reales
+   (BodyFitGym destacado + RH Eventos, Control Gastos, Serene Boutique y Portfolio XP).
+   Cada uno define `icon` (nombre de `Icon`), `kickerColor` y `demoUrl` opcional.
 3. **Skills:** edita el arreglo `skills` si cambia tu stack.
+4. **Servicios / Proceso / FAQ:** edita `services`, `processSteps` y `faqs` en el mismo archivo.
+   Los plazos y precios de las respuestas son orientativos — ajústalos a tu realidad.
 
 ## Deploy
 

@@ -1,0 +1,39 @@
+---
+import Icon from './Icon.astro';
+import { faqs } from '../data/site';
+---
+
+<section id="faq" class="relative z-10 mx-auto w-full max-w-max-container scroll-mt-20 px-margin-mobile pt-12 pb-16 lg:px-margin-desktop lg:pt-16 lg:pb-24">
+  <div class="reveal mb-10 flex flex-col gap-1">
+    <span class="font-mono text-xs font-semibold uppercase tracking-widest text-orange-700 dark:text-primary">05. / Dudas frecuentes</span>
+    <h2 class="text-2xl font-bold tracking-tight text-stone-900 sm:text-3xl lg:text-4xl dark:text-white">Preguntas frecuentes</h2>
+    <p class="mt-1 max-w-xl text-sm text-stone-600 sm:text-base dark:text-on-surface-variant">
+      Lo que más me preguntan antes de empezar un proyecto.
+    </p>
+  </div>
+
+  <div class="grid grid-cols-1 items-start gap-3 md:grid-cols-2">
+    {
+      faqs.map((f, i) => (
+        <details
+          class="reveal group rounded-xl border border-stone-200 bg-white transition-colors open:bg-stone-100 dark:border-surface-container-high dark:bg-surface-container-low dark:open:bg-surface-container"
+          style={`--reveal-delay: ${(i % 2) * 90}ms`}
+        >
+          <summary class="flex min-h-[44px] cursor-pointer list-none items-center justify-between gap-3 p-4 font-medium text-stone-900 marker:hidden [&::-webkit-details-marker]:hidden dark:text-white">
+            <span class="text-sm sm:text-base">{f.question}</span>
+            <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-stone-200/80 text-stone-600 transition-transform group-open:rotate-45 dark:bg-surface-container-high dark:text-on-surface-variant">
+              <Icon name="x" size={16} />
+            </span>
+          </summary>
+          <div class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-out motion-reduce:transition-none group-open:grid-rows-[1fr]">
+            <div class="overflow-hidden">
+              <p class="px-4 pb-4 text-xs leading-relaxed text-stone-600 opacity-0 transition-opacity delay-100 duration-300 motion-reduce:transition-none group-open:opacity-100 sm:text-sm dark:text-on-surface-variant">
+                {f.answer}
+              </p>
+            </div>
+          </div>
+        </details>
+      ))
+    }
+  </div>
+</section>

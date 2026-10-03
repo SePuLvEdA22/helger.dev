@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#131210"/>
+  <rect x="0" y="0" width="1200" height="630" fill="url(#glow)"/>
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="0%" r="80%">
+      <stop offset="0%" stop-color="#ff6b2c" stop-opacity="0.28"/>
+      <stop offset="60%" stop-color="#ff6b2c" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <g font-family="Inter, system-ui, -apple-system, sans-serif">
+    <rect x="80" y="80" width="72" height="72" rx="14" fill="#ff6b2c" fill-opacity="0.15" stroke="#ff6b2c" stroke-opacity="0.5" stroke-width="2"/>
+    <text x="116" y="130" font-family="monospace" font-size="36" font-weight="700" fill="#ff6b2c" text-anchor="middle">&gt;_</text>
+    <text x="170" y="118" font-size="40" font-weight="800" fill="#ede8df">DevCore</text>
+    <text x="170" y="148" font-family="monospace" font-size="20" fill="#ff6b2c">Systems Architect</text>
+    <text x="80" y="280" font-size="72" font-weight="800" fill="#ede8df">Helger Santiago</text>
+    <text x="80" y="340" font-size="36" font-weight="600" fill="#ff6b2c">Software Developer</text>
+    <text x="80" y="390" font-size="28" fill="#a8a29a">Electron • Next.js • Node.js • Docker • AWS • IoT</text>
+    <text x="80" y="500" font-family="monospace" font-size="24" fill="#d6d0c4">helger.dev</text>
+    <text x="80" y="540" font-family="monospace" font-size="20" fill="#8a8378">Cúcuta, Colombia • GMT-5 • Open to Work</text>
+  </g>
+</svg>

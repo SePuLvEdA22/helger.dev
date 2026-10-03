@@ -1,5 +1,8 @@
 // ── Personaliza aquí tus enlaces antes de publicar ──────────────────────────
 // Reemplaza los placeholders (#) por tus URLs reales.
+import type { Accent } from '../utils/accent';
+import type { IconName } from '../components/Icon.astro';
+
 export const site = {
   name: 'Helger Santiago',
   brand: 'DevCore',
@@ -11,7 +14,7 @@ export const site = {
   timezone: 'GMT-5',
   // PENDIENTE: confirmar dominio final de Vercel (ej. https://helger-dev.vercel.app o https://helger.dev)
   url: 'https://helger.dev',
-  ogImage: '/favicon.svg', // PENDIENTE: generar og-image 1200x630 en /public y actualizar aquí
+  ogImage: '/og-image.svg',
   github: 'https://github.com/SePuLvEdA22',
   githubHandle: 'github.com/SePuLvEdA22',
   linkedin: '#', // PENDIENTE: ej. https://www.linkedin.com/in/tu-usuario
@@ -19,14 +22,14 @@ export const site = {
   // PENDIENTE: subir el PDF a /public/cv-helger-santiago.pdf para activar el botón
   cvUrl: '/cv-helger-santiago.pdf',
   // PENDIENTE (opcional): solo dígitos con código país, ej. '573001234567'. Vacío = se oculta.
-  whatsapp: '',
+  whatsapp: '' as string,
   availability: 'Disponible para nuevos proyectos / Open to Work',
 } as const;
 
 export type Project = {
   featured?: boolean;
   kicker: string;
-  kickerColor: 'primary' | 'secondary' | 'tertiary';
+  kickerColor: Accent;
   title: string;
   subtitle: string;
   description: string;
@@ -35,7 +38,8 @@ export type Project = {
   demoUrl?: string;
   demoLabel?: string;
   badge?: string;
-  placeholder?: boolean;
+  outcome?: string;
+  icon: IconName;
 };
 
 export const projects: Project[] = [
@@ -49,7 +53,9 @@ export const projects: Project[] = [
       'Sistema profesional de administración y control de acceso para gimnasios: app de escritorio Electron + React con membresías, pagos recurrentes, SQLite local, auto-update con electron-updater y monitoreo Sentry. Integración con hardware de acceso físico en tiempo real.',
     tech: ['Electron', 'TypeScript', 'React', 'SQLite', 'Sentry', 'Vite'],
     codeUrl: 'https://github.com/SePuLvEdA22/software_gym',
-    badge: 'Producción Local'
+    badge: 'Producción Local',
+    outcome: 'Operando en producción local con hardware real',
+    icon: 'cpu'
   },
   {
     kicker: 'Web Application',
@@ -61,7 +67,9 @@ export const projects: Project[] = [
     tech: ['React', 'Vite', 'Tailwind', 'JavaScript'],
     codeUrl: 'https://github.com/SePuLvEdA22/rh-events',
     demoUrl: 'https://rheventos.vercel.app/',
-    demoLabel: 'Ver Demo'
+    demoLabel: 'Ver Demo',
+    outcome: 'Desplegada en Vercel con demo en vivo',
+    icon: 'layers'
   },
   {
     kicker: 'Mobile App / Finanzas',
@@ -71,7 +79,9 @@ export const projects: Project[] = [
     description:
       'App móvil con Expo Router y React Native para registro de gastos, persistencia con Async Storage y Secure Store, autenticación local biométrica y estado global con Zustand.',
     tech: ['Expo', 'React Native', 'TypeScript', 'Zustand'],
-    codeUrl: 'https://github.com/SePuLvEdA22/control_gastos'
+    codeUrl: 'https://github.com/SePuLvEdA22/control_gastos',
+    outcome: 'App móvil funcional construida con Expo',
+    icon: 'chart'
   },
   {
     kicker: 'E-Commerce Moderno',
@@ -83,7 +93,9 @@ export const projects: Project[] = [
     tech: ['Next.js', 'TypeScript', 'Tailwind', 'Neon', 'Vercel Blob'],
     codeUrl: 'https://github.com/SePuLvEdA22/serene-boutique',
     demoUrl: 'https://serene-boutique.vercel.app',
-    demoLabel: 'Ver Demo'
+    demoLabel: 'Ver Demo',
+    outcome: 'Desplegada en Vercel con tests Vitest',
+    icon: 'bag'
   },
   {
     kicker: 'Web Interactiva',
@@ -95,7 +107,9 @@ export const projects: Project[] = [
     tech: ['React', 'Vite', 'JavaScript', 'CSS'],
     codeUrl: 'https://github.com/SePuLvEdA22/portfolio',
     demoUrl: 'https://portafolioxp.vercel.app/',
-    demoLabel: 'Ver Demo'
+    demoLabel: 'Ver Demo',
+    outcome: 'Desplegada en Vercel con demo en vivo',
+    icon: 'monitor'
   }
 ];
 
@@ -105,8 +119,8 @@ export type Skill = {
   description: string;
   footer: string;
   tag: string;
-  accent: 'primary' | 'secondary' | 'tertiary';
-  icon: string; // nombre de icono lucide (svg inline en Skills.astro)
+  accent: Accent;
+  icon: IconName;
 };
 
 export const skills: Skill[] = [
@@ -118,4 +132,45 @@ export const skills: Skill[] = [
   { name: 'AWS', meta: 'EC2, S3 & Lambda', description: 'Instancias Linux en la nube, almacenamiento seguro de assets y funciones serverless event-driven.', footer: 'Cloud Platform', tag: 'Cloud Infra', accent: 'tertiary', icon: 'cloud' },
   { name: 'Git & GitHub', meta: 'Branching & Actions', description: 'Control de versiones exhaustivo, GitHub Actions, Pull Requests colaborativas y releases automatizadas.', footer: 'Herramientas', tag: 'VCS & CI', accent: 'primary', icon: 'git' },
   { name: 'Arduino & IoT', meta: 'Serial Communication', description: 'Controladores de relé, lectura biométrica, torniquetes y telemetría de sensores en microchips.', footer: 'Sistemas Físicos', tag: 'Hardware I/O', accent: 'secondary', icon: 'cpu' }
+];
+
+export type Service = {
+  title: string;
+  text: string;
+  proof: string;
+  accent: Accent;
+  icon: IconName;
+};
+
+export const services: Service[] = [
+  { title: 'Sitios y landing pages', text: 'Webs rápidas y optimizadas para convertir visitas en clientes, con SEO técnico y despliegue incluido.', proof: 'Ej: RH Eventos · Serene Boutique', accent: 'primary', icon: 'layers' },
+  { title: 'Apps de escritorio', text: 'Software instalable para Windows con base de datos local, actualizaciones automáticas y conexión a periféricos.', proof: 'Ej: BodyFitGym', accent: 'secondary', icon: 'monitor' },
+  { title: 'E-commerce y dashboards', text: 'Tiendas con catálogo, carrito y autenticación, más paneles con métricas para operar tu negocio.', proof: 'Ej: Serene Boutique', accent: 'tertiary', icon: 'bag' },
+  { title: 'Hardware e IoT', text: 'Puentes entre software y mundo físico: torniquetes, biometría, sensores y control de acceso en tiempo real.', proof: 'Ej: BodyFitGym + Arduino', accent: 'primary', icon: 'cpu' }
+];
+
+export type ProcessStep = {
+  title: string;
+  text: string;
+};
+
+export const processSteps: ProcessStep[] = [
+  { title: 'Descubrimiento', text: 'Llamada de 20 minutos para entender tu negocio. Recibes propuesta con alcance, precio cerrado y plazo.' },
+  { title: 'Diseño', text: 'Estructura, textos y estilo validados contigo antes de escribir código. Sin sorpresas al final.' },
+  { title: 'Construcción', text: 'Desarrollo por hitos con demos privadas. Ves el avance real cada semana y pides ajustes.' },
+  { title: 'Entrega', text: 'Despliegue, accesos y código en tu repositorio, con acompañamiento inicial incluido.' }
+];
+
+export type Faq = {
+  question: string;
+  answer: string;
+};
+
+export const faqs: Faq[] = [
+  { question: '¿Cuánto cuesta un proyecto?', answer: 'Depende del alcance. Cuéntame qué necesitas y te envío propuesta con precio cerrado y plazo, sin compromiso.' },
+  { question: '¿En cuánto tiempo lo tienes listo?', answer: 'Una landing típica toma de 1 a 3 semanas; una app a medida se divide en hitos con demos semanales. El plazo exacto va en la propuesta.' },
+  { question: '¿Trabajas de forma remota?', answer: 'Sí. Estoy en Cúcuta (GMT-5) y trabajo remoto o híbrido, con demos por videollamada y comunicación diaria.' },
+  { question: '¿El código queda en mis manos?', answer: 'Sí. Todo queda en tu repositorio, desplegado en tus cuentas y documentado para que no dependas de mí.' },
+  { question: '¿Ofreces mantenimiento?', answer: 'Sí. Después de la entrega puedes contratar acompañamiento y mejoras por horas o por mes.' },
+  { question: '¿Cómo empezamos?', answer: 'Escríbeme por correo o GitHub contando tu idea en dos líneas. Respondo en menos de 24 horas.' }
 ];
