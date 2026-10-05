@@ -113,31 +113,31 @@ const jsonPretty = JSON.stringify(profile, null, 2);
       </div>
     </div>
 
-    {/* Consola: se mantiene oscura en ambos modos como widget de terminal */}
+    {/* Consola: terminal oscura en dark, clara en light */}
     <div class="mt-8 w-full min-w-0 lg:col-span-5 lg:mt-0" data-hero>
       <div
-        class="relative max-w-full overflow-hidden rounded-xl border border-surface-container-high bg-surface-container-low shadow-2xl"
+        class="relative max-w-full overflow-hidden rounded-xl border border-stone-200 bg-white shadow-2xl dark:border-surface-container-high dark:bg-surface-container-low"
       >
         <div
-          class="flex items-center justify-between border-b border-surface-container-highest bg-surface-container-high px-4 py-2.5"
+          class="flex items-center justify-between border-b border-stone-200 bg-stone-100 px-4 py-2.5 dark:border-surface-container-highest dark:bg-surface-container-high"
         >
           <div class="flex items-center gap-2">
             <span class="inline-block h-3 w-3 rounded-full bg-rose-500"></span>
             <span class="inline-block h-3 w-3 rounded-full bg-amber-500"></span>
             <span class="inline-block h-3 w-3 rounded-full bg-orange-600"></span>
-            <span class="ml-2 font-mono text-xs text-on-surface-variant">devcore.config.json</span>
+            <span class="ml-2 font-mono text-xs text-stone-600 dark:text-on-surface-variant">devcore.config.json</span>
           </div>
-          <div class="flex items-center gap-2 text-on-surface-variant">
+          <div class="flex items-center gap-2 text-stone-500 dark:text-on-surface-variant">
             <Icon name="lock" size={15} />
-            <span class="font-mono text-[11px] text-primary/90">v2.4.0-stable</span>
+            <span class="font-mono text-[11px] text-orange-700 dark:text-primary/90">v2.4.0-stable</span>
           </div>
         </div>
-        <div class="terminal-scroll overflow-x-auto bg-[#080e1a] p-4 font-mono text-[12px] leading-relaxed sm:p-5 sm:text-[13px]">
-          <pre lang="en" class="w-max min-w-full pr-4 text-on-surface"><span class="text-tertiary">{'{'}</span>
-  <span class="text-secondary">"developer"</span>: <span class="text-primary-fixed">"{profile.developer}"</span>,
-  <span class="text-secondary">"role"</span>: <span class="text-primary-fixed">"{profile.role}"</span>,
+        <div class="terminal-scroll overflow-x-auto bg-stone-100 p-4 font-mono text-[12px] leading-relaxed sm:p-5 sm:text-[13px] dark:bg-[#080e1a]">
+          <pre lang="en" class="w-max min-w-full pr-4 text-stone-900 dark:text-on-surface"><span class="text-tertiary">{'{'}</span>
+  <span class="text-secondary">"developer"</span>: <span class="text-orange-800 dark:text-primary-fixed">"{profile.developer}"</span>,
+  <span class="text-secondary">"role"</span>: <span class="text-orange-800 dark:text-primary-fixed">"{profile.role}"</span>,
   <span class="text-secondary">"status"</span>: <span class="text-primary">"{profile.status}"</span>,
-  <span class="text-secondary">"location"</span>: <span class="text-primary-fixed">"{profile.location}"</span>,
+  <span class="text-secondary">"location"</span>: <span class="text-orange-800 dark:text-primary-fixed">"{profile.location}"</span>,
   <span class="text-secondary">"core"</span>: [
     {profile.core.map((tech, i) => (
       <><span class="text-primary">"{tech}"</span>{i < profile.core.length - 1 ? ',' : ''}{'\n    '}</>
@@ -156,11 +156,11 @@ const jsonPretty = JSON.stringify(profile, null, 2);
 <span class="text-tertiary">{'}'}</span></pre>
         </div>
         <div
-          class="flex items-center justify-between border-t border-surface-container-high/60 bg-surface-container px-4 py-2 font-mono text-xs text-on-surface-variant"
+          class="flex items-center justify-between border-t border-stone-200 bg-stone-50 px-4 py-2 font-mono text-xs text-stone-500 dark:border-surface-container-high/60 dark:bg-surface-container dark:text-on-surface-variant"
         >
           <div class="flex items-center gap-3">
-            <span class="flex items-center gap-1.5 text-primary">
-              <span class="h-1.5 w-1.5 rounded-full bg-primary"></span> UTF-8
+            <span class="flex items-center gap-1.5 text-orange-700 dark:text-primary">
+              <span class="h-1.5 w-1.5 rounded-full bg-orange-600 dark:bg-primary"></span> UTF-8
             </span>
             <span>•</span>
             <span>Node v20.11</span>
@@ -171,7 +171,7 @@ const jsonPretty = JSON.stringify(profile, null, 2);
             data-json={jsonPretty}
             title="Copiar configuración"
             aria-label="Copiar configuración del perfil"
-            class="flex min-h-[44px] min-w-[44px] cursor-pointer items-center justify-center gap-1 px-2 text-on-surface-variant transition-colors hover:text-white"
+            class="flex min-h-[44px] min-w-[44px] cursor-pointer items-center justify-center gap-1 px-2 text-stone-500 transition-colors hover:text-stone-900 dark:text-on-surface-variant dark:hover:text-white"
           >
             <Icon name="copy" size={15} />
             <span id="copy-json-text" class="font-mono text-[11px]" aria-live="polite">Copiar</span>
