@@ -6,6 +6,7 @@ const links = [
   { href: '#inicio', label: 'Inicio', path: 'inicio' },
   { href: '#servicios', label: 'Servicios', path: 'servicios' },
   { href: '#proyectos', label: 'Proyectos', path: 'proyectos' },
+  { href: '#sobre-mi', label: 'Sobre mí', path: 'sobre-mi' },
   { href: '#habilidades', label: 'Habilidades', path: 'habilidades' },
   { href: '#faq', label: 'FAQ', path: 'faq' },
   { href: '#contacto', label: 'Contacto', path: 'contacto' }
@@ -44,11 +45,11 @@ const ICON_BTN =
       </span>
       <span class="flex min-w-0 flex-col leading-tight">
         <span class="truncate font-display text-lg font-bold tracking-tight text-stone-900 dark:text-white">{site.brand}</span>
-        <span class="truncate font-mono text-[11px] text-orange-700/90 dark:text-primary/80">Systems Architect</span>
+        <span lang="en" class="truncate font-mono text-[11px] text-orange-700/90 dark:text-primary/80">{site.role}</span>
       </span>
     </a>
 
-    {/* Nav desktop solo en xl: en lg (1024–1280px) brand + 5 links + acciones no caben */}
+    {/* Nav desktop solo en xl: en lg (1024–1280px) brand + 7 links + acciones no caben */}
     <nav
       class="hidden min-w-0 items-center gap-1 rounded-full border border-stone-300/70 bg-stone-200/50 p-1.5 xl:flex dark:border-surface-container-high/60 dark:bg-surface-container-lowest/80"
       aria-label="Navegación principal"
@@ -60,7 +61,7 @@ const ICON_BTN =
             data-path={l.path}
             data-active={i === 0 ? 'true' : 'false'}
             aria-current={i === 0 ? 'page' : undefined}
-            class={`nav-item shrink-0 whitespace-nowrap rounded-full px-3.5 py-1.5 text-sm transition-colors ${i === 0 ? ACTIVE : INACTIVE}`}
+            class={`nav-item inline-flex min-h-[40px] shrink-0 items-center whitespace-nowrap rounded-full px-3 py-2 text-sm transition-colors ${i === 0 ? ACTIVE : INACTIVE}`}
           >
             {l.label}
           </a>
@@ -89,7 +90,7 @@ const ICON_BTN =
       </a>
       <a
         href="#contacto"
-        class="hidden items-center gap-1.5 whitespace-nowrap rounded-xl border border-orange-700/30 bg-orange-700/10 px-3.5 py-1.5 text-xs font-semibold tracking-wide text-orange-800 transition-all hover:bg-orange-600 hover:text-white md:inline-flex dark:border-primary/40 dark:bg-primary/15 dark:text-primary dark:hover:bg-primary dark:hover:text-on-primary"
+        class="hidden min-h-[44px] items-center gap-1.5 whitespace-nowrap rounded-xl border border-orange-700/30 bg-orange-700/10 px-3.5 text-xs font-semibold tracking-wide text-orange-800 transition-all hover:bg-orange-600 hover:text-white md:inline-flex dark:border-primary/40 dark:bg-primary/15 dark:text-primary dark:hover:bg-primary dark:hover:text-on-primary"
       >
         <Icon name="send" size={15} />
         <span>Contactar</span>
@@ -142,7 +143,16 @@ const ICON_BTN =
       setMenu(menu?.classList.contains('hidden') ?? true);
     });
     menu?.querySelectorAll('a').forEach((a) => {
-      a.addEventListener('click', () => setMenu(false));
+      a.addEventListener('click', () => {
+        setMenu(false);
+        btn?.focus();
+      });
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && menu && !menu.classList.contains('hidden')) {
+        setMenu(false);
+        btn?.focus();
+      }
     });
 
     // Scroll-spy con IntersectionObserver: marca la sección que cruza la

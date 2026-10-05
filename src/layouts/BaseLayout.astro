@@ -45,10 +45,12 @@ const personJsonLd = {
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImageURL} />
+    <meta property="og:image:alt" content={`Portafolio de ${site.name} — ${site.role}`} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageURL} />
+    <meta name="twitter:image:alt" content={`Portafolio de ${site.name} — ${site.role}`} />
     <script type="application/ld+json" set:html={JSON.stringify(personJsonLd)} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <noscript>
@@ -83,6 +85,9 @@ const personJsonLd = {
 
     <script is:inline>
       document.addEventListener('DOMContentLoaded', () => {
+        // Activa los estados ocultos iniciales (reveal). Si este script
+        // falla antes de aquí, el contenido queda visible por defecto.
+        document.documentElement.classList.add('reveal-on');
         // Scroll suave para anclas
         document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
           anchor.addEventListener('click', (e) => {
@@ -175,6 +180,9 @@ const personJsonLd = {
           (el as HTMLElement).style.transform = 'none';
         });
       } else {
+        // Solo ocultar cuando la animación realmente va a correr.
+        // Si este módulo falla (Motion no carga), el hero queda visible.
+        document.documentElement.classList.add('motion-on');
         const heroEls = document.querySelectorAll('[data-hero]');
         if (heroEls.length > 0) {
           animate(

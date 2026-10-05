@@ -72,7 +72,9 @@ html:not(.dark) ::-webkit-scrollbar-track { background: #e7e0d3; }
 html:not(.dark) ::-webkit-scrollbar-thumb { background: #a8a29a; }
 
 /* ── Reveal on scroll (fade-in sutil, sin librerías) ──── */
-.reveal {
+/* Oculto solo cuando JS confirma que el observer va a correr (.reveal-on).
+   Sin JS o con fallo de script, el contenido queda visible. */
+.reveal-on .reveal {
   opacity: 0;
   transform: translateY(18px);
   transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
@@ -88,8 +90,10 @@ html:not(.dark) ::-webkit-scrollbar-thumb { background: #a8a29a; }
   .animate-ping, .animate-pulse, .cursor-blink { animation: none !important; }
 }
 
-/* ── Entrada del Hero vía Motion (con fallback noscript en BaseLayout) ──── */
-[data-hero] {
+/* ── Entrada del Hero vía Motion ──── */
+/* Visible por defecto; solo se oculta cuando JS confirma que va a animar
+   (clase .motion-on). Si Motion falla o JS no corre, el contenido se ve. */
+.motion-on [data-hero] {
   opacity: 0;
   transform: translateY(18px);
 }
@@ -123,4 +127,10 @@ html:not(.dark) .ambient-glow {
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-x: contain;
   scrollbar-width: thin;
+}
+
+/* Widgets oscuros intencionales en light-mode: anillo suave para que no se vean como manchas */
+html:not(.dark) .bg-surface-container-lowest,
+html:not(.dark) .bg-surface-container-low {
+  box-shadow: 0 24px 48px -24px rgb(28 25 23 / 0.35), 0 0 0 1px rgb(28 25 23 / 0.08);
 }

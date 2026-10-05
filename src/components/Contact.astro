@@ -11,6 +11,7 @@ const channelLabel = 'text-stone-600 dark:text-on-surface-variant';
 
 const hasLinkedin = site.linkedin && site.linkedin !== '#';
 const hasWhatsapp = site.whatsapp && site.whatsapp.length > 0;
+const hasCv = site.cvUrl && site.cvUrl.length > 0;
 const emailHref =
   `mailto:${site.email}` +
   `?subject=${encodeURIComponent('Propuesta de proyecto — Portafolio')}` +
@@ -34,19 +35,21 @@ const emailHref =
         <div class="mt-4 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
           <a
             href={emailHref}
-            class="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-on-primary shadow-lg shadow-primary/25 transition-all hover:-transtone-y-0.5 hover:bg-primary-fixed"
+            class="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-on-primary shadow-lg shadow-primary/25 transition-all hover:-translate-y-0.5 hover:bg-primary-fixed"
           >
             <Icon name="send" size={18} />
             <span>Escríbeme directo</span>
           </a>
-          <a
-            href={site.cvUrl}
-            download
-            class="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl border border-stone-300 bg-white px-6 py-3 text-sm font-medium text-stone-900 shadow-sm transition-all hover:bg-stone-100 dark:border-surface-container-high dark:bg-surface-container dark:text-white dark:hover:bg-surface-container-high"
-          >
-            <Icon name="arrow-down" size={18} class="text-orange-700 dark:text-primary" />
-            <span>Descargar CV</span>
-          </a>
+          {hasCv && (
+            <a
+              href={site.cvUrl}
+              download
+              class="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl border border-stone-300 bg-white px-6 py-3 text-sm font-medium text-stone-900 shadow-sm transition-all hover:bg-stone-100 dark:border-surface-container-high dark:bg-surface-container dark:text-white dark:hover:bg-surface-container-high"
+            >
+              <Icon name="arrow-down" size={18} class="text-orange-700 dark:text-primary" />
+              <span>Descargar CV</span>
+            </a>
+          )}
         </div>
       </div>
 

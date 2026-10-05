@@ -19,8 +19,8 @@ export const site = {
   githubHandle: 'github.com/SePuLvEdA22',
   linkedin: '#', // PENDIENTE: ej. https://www.linkedin.com/in/tu-usuario
   email: 'hj.santiago.sepulveda@gmail.com',
-  // PENDIENTE: subir el PDF a /public/cv-helger-santiago.pdf para activar el botón
-  cvUrl: '/cv-helger-santiago.pdf',
+  // Activo cuando subas el PDF a /public/cv-helger-santiago.pdf. Vacío = se ocultan los botones.
+  cvUrl: '' as string,
   // PENDIENTE (opcional): solo dígitos con código país, ej. '573001234567'. Vacío = se oculta.
   whatsapp: '' as string,
   availability: 'Disponible para nuevos proyectos / Open to Work',
@@ -138,15 +138,16 @@ export type Service = {
   title: string;
   text: string;
   proof: string;
+  proofLinks?: { label: string; href: string }[];
   accent: Accent;
   icon: IconName;
 };
 
 export const services: Service[] = [
-  { title: 'Sitios y landing pages', text: 'Webs rápidas y optimizadas para convertir visitas en clientes, con SEO técnico y despliegue incluido.', proof: 'Ej: RH Eventos · Serene Boutique', accent: 'primary', icon: 'layers' },
-  { title: 'Apps de escritorio', text: 'Software instalable para Windows con base de datos local, actualizaciones automáticas y conexión a periféricos.', proof: 'Ej: BodyFitGym', accent: 'secondary', icon: 'monitor' },
-  { title: 'E-commerce y dashboards', text: 'Tiendas con catálogo, carrito y autenticación, más paneles con métricas para operar tu negocio.', proof: 'Ej: Serene Boutique', accent: 'tertiary', icon: 'bag' },
-  { title: 'Hardware e IoT', text: 'Puentes entre software y mundo físico: torniquetes, biometría, sensores y control de acceso en tiempo real.', proof: 'Ej: BodyFitGym + Arduino', accent: 'primary', icon: 'cpu' }
+  { title: 'Sitios y landing pages', text: 'Webs rápidas y optimizadas para convertir visitas en clientes, con SEO técnico y despliegue incluido.', proof: 'Ej:', accent: 'primary', icon: 'layers', proofLinks: [{ label: 'RH Eventos', href: 'https://rheventos.vercel.app/' }, { label: 'Serene Boutique', href: 'https://serene-boutique.vercel.app' }] },
+  { title: 'Apps de escritorio', text: 'Software instalable para Windows con base de datos local, actualizaciones automáticas y conexión a periféricos.', proof: 'Ej:', accent: 'secondary', icon: 'monitor', proofLinks: [{ label: 'BodyFitGym', href: 'https://github.com/SePuLvEdA22/software_gym' }] },
+  { title: 'E-commerce y dashboards', text: 'Tiendas con catálogo, carrito y autenticación, más paneles con métricas para operar tu negocio.', proof: 'Ej:', accent: 'tertiary', icon: 'bag', proofLinks: [{ label: 'Serene Boutique', href: 'https://github.com/SePuLvEdA22/serene-boutique' }] },
+  { title: 'Hardware e IoT', text: 'Puentes entre software y mundo físico: torniquetes, biometría, sensores y control de acceso en tiempo real.', proof: 'Ej:', accent: 'primary', icon: 'cpu', proofLinks: [{ label: 'BodyFitGym + Arduino', href: 'https://github.com/SePuLvEdA22/software_gym' }] }
 ];
 
 export type ProcessStep = {

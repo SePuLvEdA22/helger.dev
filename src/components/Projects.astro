@@ -156,9 +156,11 @@ const [featured, ...rest] = projects;
                   <div class="truncate font-mono text-[11px] text-stone-600 dark:text-on-surface-variant">{p.tech.slice(0, 2).join(' • ')}</div>
                 </div>
               </div>
-              <div class="flex items-center justify-between font-mono text-[11px] text-stone-600 dark:text-on-surface-variant">
-                <span>{p.tech.length} techs</span>
-                <span>{p.demoUrl ? 'Demo en vivo' : 'Código abierto'}</span>
+              <div class="flex items-center gap-2 font-mono text-[11px] text-stone-600 dark:text-on-surface-variant">
+                <span class="inline-flex items-center gap-1">
+                  <span class={`h-1.5 w-1.5 rounded-full ${dotColor[p.kickerColor]}`} aria-hidden="true" />
+                  {p.demoUrl ? 'Demo en vivo' : 'Código abierto'}
+                </span>
               </div>
             </div>
             <span class={`font-mono text-[11px] font-semibold uppercase tracking-wider ${kickerColor[p.kickerColor]}`}>
