@@ -2,152 +2,38 @@
 import Icon from './Icon.astro';
 import { site } from '../data/site';
 
-const channelRow =
-  'border-stone-200 bg-stone-100 dark:border-surface-container-high dark:bg-surface-container';
-const channelRowHover =
-  'hover:bg-stone-200 dark:hover:bg-surface-container-high';
-const channelTitle = 'text-stone-900 dark:text-white';
-const channelLabel = 'text-stone-600 dark:text-on-surface-variant';
-
-const hasLinkedin = site.linkedin && site.linkedin !== '#';
-const hasWhatsapp = site.whatsapp && site.whatsapp.length > 0;
-const hasCv = site.cvUrl && site.cvUrl.length > 0;
-const emailHref =
-  `mailto:${site.email}` +
-  `?subject=${encodeURIComponent('Propuesta de proyecto — Portafolio')}` +
-  `&body=${encodeURIComponent('Hola Helger,\n\nVi tu portafolio y me gustaría hablar de un proyecto.\n\nContexto:\nPresupuesto estimado:\nPlazo:\n\nGracias.')}`;
+const mailto =
+  `mailto:${site.email}?subject=${encodeURIComponent('Hola Helger')}`;
+const ext = { target: '_blank', rel: 'noopener noreferrer' };
 ---
 
-<section id="contacto" class="relative z-10 mx-auto w-full max-w-max-container scroll-mt-20 px-margin-mobile pt-12 pb-16 lg:px-margin-desktop lg:pt-16 lg:pb-24">
-  <div class="reveal rounded-2xl border border-stone-200 bg-white p-6 shadow-2xl sm:p-10 lg:p-12 dark:border-surface-container-high dark:bg-surface-container-low">
-    <div class="grid grid-cols-1 items-center gap-6 lg:grid-cols-12">
-      <div class="flex flex-col items-start gap-2 lg:col-span-6">
-        <span class="font-mono text-xs font-semibold uppercase tracking-widest text-orange-700 dark:text-primary">06. / Conectar</span>
-        <h2 class="text-3xl font-bold tracking-tight text-stone-900 sm:text-4xl dark:text-white">¿Hablamos de un proyecto?</h2>
-        <p class="mt-2 max-w-lg text-sm leading-relaxed text-stone-600 sm:text-base dark:text-on-surface-variant">
-          Actualmente estoy disponible para nuevas oportunidades laborales, proyectos freelance o
-          colaboraciones de software de alto impacto. No dudes en escribirme directamente.
-        </p>
-        <div class="mt-4 flex items-center gap-2">
-          <span class="h-3 w-3 animate-pulse rounded-full bg-orange-600 dark:bg-primary"></span>
-          <span class="font-mono text-xs font-medium text-orange-800 dark:text-primary">Respuesta garantizada en menos de 24h</span>
-        </div>
-        <div class="mt-4 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
-          <a
-            href={emailHref}
-            class="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-on-primary shadow-lg shadow-primary/25 transition-all hover:-translate-y-0.5 hover:bg-primary-fixed"
-          >
-            <Icon name="send" size={18} />
-            <span>Escríbeme directo</span>
-          </a>
-          {hasCv && (
-            <a
-              href={site.cvUrl}
-              download
-              class="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl border border-stone-300 bg-white px-6 py-3 text-sm font-medium text-stone-900 shadow-sm transition-all hover:bg-stone-100 dark:border-surface-container-high dark:bg-surface-container dark:text-white dark:hover:bg-surface-container-high"
-            >
-              <Icon name="arrow-down" size={18} class="text-orange-700 dark:text-primary" />
-              <span>Descargar CV</span>
-            </a>
-          )}
-        </div>
-      </div>
+<section id="contacto" class="relative overflow-hidden py-24 md:py-36">
+  <div class="dots pointer-events-none absolute -left-16 bottom-0 h-64 w-64 rounded-full" aria-hidden="true"></div>
+  <div class="relative mx-auto max-w-page px-5 sm:px-8">
+    <p class="reveal mb-3 text-sm font-semibold uppercase tracking-[0.14em] text-accent-ink">Contacto</p>
+    <h2 class="reveal max-w-3xl text-5xl font-semibold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
+      ¿Hablamos? <em class="font-medium text-accent">Escríbeme.</em>
+    </h2>
+    <p class="reveal mt-6 max-w-xl text-lg text-muted">
+      Ya sea un proyecto freelance o una oportunidad laboral, respondo en menos de 24 horas.
+    </p>
 
-      <div class="flex w-full flex-col gap-3 lg:col-span-6">
-        <div class={`flex items-center justify-between gap-3 rounded-xl border p-4 ${channelRow}`}>
-          <div class="flex min-w-0 items-center gap-3">
-            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-orange-700/25 bg-orange-700/10 text-orange-700 dark:border-primary/20 dark:bg-surface-container-high dark:text-primary">
-              <Icon name="mail" size={20} />
-            </div>
-            <div class="flex min-w-0 flex-col">
-              <span class={`font-mono text-[11px] ${channelLabel}`}>Correo Electrónico</span>
-              <a
-                href={emailHref}
-                class="truncate text-sm font-semibold text-stone-900 transition-colors hover:text-orange-800 sm:text-base dark:text-white dark:hover:text-primary"
-              >
-                {site.email}
-              </a>
-            </div>
-          </div>
-          <button
-            id="copy-email-btn"
-            type="button"
-            data-email={site.email}
-            title="Copiar correo"
-            aria-label="Copiar correo electrónico"
-            class="flex min-h-[44px] shrink-0 items-center gap-1.5 rounded-lg border border-stone-300 bg-stone-200 px-3 py-1.5 font-mono text-xs text-stone-700 transition-colors hover:bg-stone-300 dark:border-surface-container-highest dark:bg-surface-container-high dark:text-white dark:hover:bg-surface-container-highest"
-          >
-            <Icon name="copy" size={16} />
-            <span id="copy-email-text" class="hidden sm:inline" aria-live="polite">Copiar</span>
-          </button>
-        </div>
-
-        <a
-          href={site.github}
-          target="_blank"
-          rel="noopener noreferrer"
-          class={`flex items-center justify-between gap-3 rounded-xl border p-4 transition-all ${channelRow} ${channelRowHover}`}
-        >
-          <div class="flex items-center gap-3">
-            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-stone-600/25 bg-stone-600/10 text-stone-600 dark:border-secondary/20 dark:bg-surface-container-high dark:text-secondary">
-              <Icon name="github" size={20} />
-            </div>
-            <div class="flex flex-col">
-              <span class={`font-mono text-[11px] ${channelLabel}`}>GitHub Perfil</span>
-              <span class={`text-sm font-semibold sm:text-base ${channelTitle}`}>{site.githubHandle}</span>
-            </div>
-          </div>
-          <Icon name="arrow-up-right" size={18} class={channelLabel} />
-        </a>
-
-        {hasLinkedin && (
-          <a
-            href={site.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            class={`flex min-h-[44px] items-center justify-between gap-3 rounded-xl border p-4 transition-all ${channelRow} ${channelRowHover}`}
-          >
-            <div class="flex items-center gap-3">
-              <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-amber-800/25 bg-amber-800/10 text-amber-800 dark:border-tertiary/20 dark:bg-surface-container-high dark:text-tertiary">
-                <Icon name="linkedin" size={20} />
-              </div>
-              <div class="flex flex-col">
-                <span class={`font-mono text-[11px] ${channelLabel}`}>LinkedIn</span>
-                <span class={`text-sm font-semibold sm:text-base ${channelTitle}`}>Conectar en LinkedIn</span>
-              </div>
-            </div>
-            <Icon name="arrow-up-right" size={18} class={channelLabel} />
-          </a>
-        )}
-
-        {hasWhatsapp && (
-          <a
-            href={`https://wa.me/${site.whatsapp}?text=${encodeURIComponent('Hola Helger, vi tu portafolio y quiero hablar de un proyecto.')}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            class={`flex min-h-[44px] items-center justify-between gap-3 rounded-xl border p-4 transition-all ${channelRow} ${channelRowHover}`}
-          >
-            <div class="flex items-center gap-3">
-              <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-orange-700/25 bg-orange-700/10 text-orange-700 dark:border-primary/20 dark:bg-surface-container-high dark:text-primary">
-                <Icon name="send" size={20} />
-              </div>
-              <div class="flex flex-col">
-                <span class={`font-mono text-[11px] ${channelLabel}`}>WhatsApp</span>
-                <span class={`text-sm font-semibold sm:text-base ${channelTitle}`}>Chat directo</span>
-              </div>
-            </div>
-            <Icon name="arrow-up-right" size={18} class={channelLabel} />
-          </a>
-        )}
-
-        <div class={`flex items-center justify-between rounded-xl border px-4 py-2.5 font-mono text-xs ${channelLabel} border-stone-200 bg-stone-200/60 dark:border-surface-container-high dark:bg-surface-container-high/50`}>
-          <div class="flex items-center gap-2">
-            <Icon name="map-pin" size={16} class="text-stone-600 dark:text-secondary" />
-            <span>{site.location} • {site.timezone}</span>
-          </div>
-          <span class="font-semibold text-orange-800 dark:text-primary">Remoto / Híbrido</span>
-        </div>
-      </div>
+    <div class="reveal mt-10 flex flex-wrap items-center gap-4">
+      <a href={mailto} class="link break-all font-display text-2xl sm:text-4xl">{site.email}</a>
+      <button
+        type="button"
+        data-copy={site.email}
+        aria-label="Copiar correo"
+        class="inline-flex min-h-[40px] items-center gap-2 rounded-full border border-line bg-surface px-4 text-sm font-medium text-muted transition-colors hover:border-ink hover:text-ink"
+      >
+        <Icon name="copy" size={16} /> <span data-copy-label aria-live="polite">Copiar</span>
+      </button>
     </div>
+
+    <ul class="reveal mt-10 flex flex-wrap gap-x-8 gap-y-3">
+      <li><a href={site.github} {...ext} class="link">GitHub</a></li>
+      {site.linkedin && <li><a href={site.linkedin} {...ext} class="link">LinkedIn</a></li>}
+      {site.cvUrl && <li><a href={site.cvUrl} download class="link">Descargar CV</a></li>}
+    </ul>
   </div>
 </section>
