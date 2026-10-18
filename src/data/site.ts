@@ -27,7 +27,7 @@ export type Project = {
   year?: string;
   codeUrl: string;
   demoUrl?: string;
-  image?: string; // PENDIENTE: captura en /public/projects/
+  image?: string; // captura 1280x800 en /public/projects/
   status?: string;
 };
 
@@ -49,6 +49,7 @@ export const projects: Project[] = [
     tags: ['Next.js', 'TypeScript', 'Postgres', 'Vitest'],
     codeUrl: 'https://github.com/SePuLvEdA22/serene-boutique',
     demoUrl: 'https://serene-boutique.vercel.app',
+    image: '/projects/serene-boutique.jpg',
   },
   {
     title: 'RH Eventos',
@@ -58,6 +59,7 @@ export const projects: Project[] = [
     tags: ['React', 'Vite', 'Tailwind'],
     codeUrl: 'https://github.com/SePuLvEdA22/rh-events',
     demoUrl: 'https://rheventos.vercel.app/',
+    image: '/projects/rh-eventos.jpg',
   },
   {
     title: 'Control Gastos',
@@ -75,6 +77,7 @@ export const projects: Project[] = [
     tags: ['React', 'Vite', 'CSS'],
     codeUrl: 'https://github.com/SePuLvEdA22/portfolio',
     demoUrl: 'https://portafolioxp.vercel.app/',
+    image: '/projects/portfolio-xp.jpg',
   },
 ];
 
