@@ -39,8 +39,12 @@ const ext = { target: '_blank', rel: 'noopener noreferrer' };
   <div class="mt-16 grid gap-x-12 gap-y-14 md:grid-cols-2">
     {rest.map((p, i) => (
       <article class="reveal border-t border-ink/80 pt-6" style={`--d: ${(i % 2) * 90}ms`}>
-        {p.image && (
-          <img src={p.image} alt={`Captura de ${p.title}`} loading="lazy" class="mb-6 aspect-[16/10] w-full rounded-xl border border-line object-cover object-top" />
+        {p.image ? (
+          <img src={p.image} alt={`Captura de ${p.title}`} width="1280" height="800" loading="lazy" decoding="async" class="mb-6 aspect-[16/10] w-full rounded-xl border border-line object-cover object-top" />
+        ) : (
+          <div class="dots mb-6 flex aspect-[16/10] w-full items-center justify-center rounded-xl border border-line bg-surface" aria-hidden="true">
+            <span class="bg-surface px-4 font-display text-4xl font-medium italic text-soft-ink">{p.title}</span>
+          </div>
         )}
         <div class="flex items-baseline justify-between gap-4">
           <h3 class="text-3xl font-semibold tracking-tight">{p.title}</h3>
