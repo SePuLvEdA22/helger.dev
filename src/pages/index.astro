@@ -1,25 +1,19 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
-import Services from '../components/Services.astro';
-import About from '../components/About.astro';
 import Projects from '../components/Projects.astro';
-import Skills from '../components/Skills.astro';
-import Faq from '../components/Faq.astro';
+import About from '../components/About.astro';
+import Freelance from '../components/Freelance.astro';
 import Contact from '../components/Contact.astro';
 ---
 
 <BaseLayout
-  title="Helger Santiago | Software Developer & Estudiante de Ingeniería"
-  description="Portafolio de Helger Santiago: Software Developer y estudiante de Ingeniería de Software en Cúcuta, Colombia. Electron, Next.js, Node.js, Docker, AWS y hardware Arduino."
+  title="Helger Santiago | Software Developer"
+  description="Helger Santiago, desarrollador de software en Cúcuta, Colombia. Apps web, de escritorio y sistemas conectados a hardware con React, Next.js, Electron y Node.js."
 >
-  <div class="flex w-full flex-col divide-y divide-stone-200/70 dark:divide-surface-container-high/40">
-    <Hero />
-    <Services />
-    <Projects />
-    <About />
-    <Skills />
-    <Faq />
-    <Contact />
-  </div>
+  <Hero />
+  <Projects />
+  <About />
+  <Freelance />
+  <Contact />
 </BaseLayout>

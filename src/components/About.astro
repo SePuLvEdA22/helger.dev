@@ -1,118 +1,34 @@
 ---
-import Icon, { type IconName } from './Icon.astro';
-import { accentBox } from '../utils/accent';
-import type { Accent } from '../utils/accent';
-
-type Feature = {
-  icon: IconName;
-  tint: Accent | 'plain';
-  title: string;
-  text: string;
-};
-
-const features: Feature[] = [
-  {
-    icon: 'monitor',
-    tint: 'primary',
-    title: 'Fullstack & Desktop Apps',
-    text: 'Software nativo multiplataforma con Electron e interfaces web reactivas con Next.js y React.'
-  },
-  {
-    icon: 'cpu',
-    tint: 'secondary',
-    title: 'Hardware & IoT Integration',
-    text: 'Puentes de comunicación entre microcontroladores Arduino, biometría, torniquetes y software de control.'
-  },
-  {
-    icon: 'cloud-sync',
-    tint: 'plain',
-    title: 'Cloud & Contenedores',
-    text: 'Containerización uniforme con Docker, orquestación, despliegues escalables y servicios en AWS.'
-  },
-  {
-    icon: 'architecture',
-    tint: 'tertiary',
-    title: 'Clean Code & Patrones',
-    text: 'Patrones de diseño desacoplados, separación de responsabilidades, APIs RESTful y pipelines de CI/CD.'
-  }
-];
-
-const tintBox: Record<string, string> = {
-  ...accentBox,
-  plain: 'border-stone-300 bg-stone-200/70 text-stone-600 dark:border-surface-container-high dark:bg-surface-container-highest dark:text-secondary'
-};
+import Section from './Section.astro';
+import { stack } from '../data/site';
 ---
 
-<section id="sobre-mi" class="relative z-10 mx-auto w-full max-w-max-container scroll-mt-20 px-margin-mobile pt-12 pb-16 lg:px-margin-desktop lg:pt-16 lg:pb-24">
-  <div class="reveal mb-10 flex flex-col gap-1">
-    <span class="font-mono text-xs font-semibold uppercase tracking-widest text-orange-700 dark:text-primary">03. / Trayectoria</span>
-    <h2 class="text-2xl font-bold tracking-tight text-stone-900 sm:text-3xl lg:text-4xl dark:text-white">
-      Sobre Mí &amp; Filosofía de Desarrollo
-    </h2>
-    <p class="mt-1 max-w-2xl text-sm text-stone-600 sm:text-base dark:text-on-surface-variant">
-      Integrando hardware físico, aplicaciones de escritorio reactivas y ecosistemas en la nube.
-    </p>
-  </div>
-
-  <div class="grid grid-cols-1 items-stretch gap-6 lg:grid-cols-12">
-    <div class="reveal flex flex-col justify-between rounded-xl border border-stone-200 bg-white p-6 shadow-sm sm:p-8 lg:col-span-7 dark:border-surface-container-high dark:bg-surface-container-low">
-      <div class="space-y-4 text-sm leading-relaxed text-stone-600 sm:text-base dark:text-on-surface-variant">
-        <p>
-          Soy estudiante de <strong class="font-semibold text-stone-900 dark:text-white">Ingeniería de Software </strong>
-          y desarrollador radicado en <span class="font-medium text-stone-600 dark:text-secondary">Cúcuta, Colombia</span>.
-          Mi fascinación por la tecnología se centra en el espectro completo del desarrollo informático:
-          desde la precisión a bajo nivel de la electrónica y microcontroladores, hasta arquitecturas de
-          software distribuidas.
-        </p>
-        <p>
-          Cuento con amplia experiencia diseñando aplicaciones de escritorio con 
-          <strong class="font-semibold text-orange-800 dark:text-primary"> Electron</strong> y
-          <strong class="font-semibold text-stone-900 dark:text-white"> Node.js</strong>, capaces de interactuar en tiempo
-          real con periféricos y sensores <strong class="font-semibold text-amber-800 dark:text-tertiary"> Arduino </strong>
-          mediante comunicación serial IPC directa. Al mismo tiempo, construyo plataformas web accesibles
-          y ultra optimizadas con <strong class="font-semibold text-stone-600 dark:text-secondary">Next.js</strong> y
-          <strong class="font-semibold text-stone-900 dark:text-white"> TypeScript</strong>.
-        </p>
-        <p>
-          Mi enfoque es rigurosamente pragmático: priorizo el rendimiento medible, el código limpio y
-          desacoplado, la resiliencia en despliegues con
-          <strong class="font-semibold text-stone-900 dark:text-white"> Docker / AWS</strong> y, sobre todo, una experiencia
-          de uso impecable y confiable.
-        </p>
-      </div>
-      <div class="mt-6 grid grid-cols-3 gap-2 rounded-xl border border-stone-200 bg-stone-100 p-3 sm:gap-3 sm:p-4 dark:border-surface-container-high/60 dark:bg-surface-container">
-        <div class="flex min-w-0 flex-col gap-1">
-          <span class="break-words font-mono text-base font-bold leading-tight tracking-tight text-orange-700 sm:text-2xl dark:text-primary">100%</span>
-          <span class="break-words font-mono text-[10px] uppercase leading-tight tracking-wider text-stone-500 sm:text-[11px] dark:text-on-surface-variant">Clean Code</span>
-        </div>
-        <div class="flex min-w-0 flex-col gap-1">
-          <span class="break-words font-mono text-base font-bold leading-tight tracking-tight text-stone-600 sm:text-2xl dark:text-secondary">IoT + IPC</span>
-          <span class="break-words font-mono text-[10px] uppercase leading-tight tracking-wider text-stone-500 sm:text-[11px] dark:text-on-surface-variant">Hardware I/O</span>
-        </div>
-        <div class="flex min-w-0 flex-col gap-1">
-          <span class="break-words font-mono text-base font-bold leading-tight tracking-tight text-amber-800 sm:text-2xl dark:text-tertiary">Cloud</span>
-          <span class="break-words font-mono text-[10px] uppercase leading-tight tracking-wider text-stone-500 sm:text-[11px] dark:text-on-surface-variant">Docker / CI</span>
-        </div>
-      </div>
+<Section id="sobre-mi" eyebrow="Sobre mí" title="Del microcontrolador a la nube">
+  <div class="grid gap-14 md:grid-cols-[1.2fr_1fr] md:gap-20">
+    <div class="reveal space-y-5 text-lg leading-relaxed">
+      <p>
+        Soy desarrollador de software y estudiante de Ingeniería de Software en Cúcuta, Colombia.
+        Me gusta el rango completo: desde leer un sensor por puerto serial hasta desplegar una app
+        en la nube.
+      </p>
+      <p class="text-muted">
+        He construido apps de escritorio con <strong class="font-semibold text-ink">Electron</strong> que hablan
+        en tiempo real con hardware <strong class="font-semibold text-ink">Arduino</strong>, y plataformas web con{' '}
+        <strong class="font-semibold text-ink">Next.js</strong> y <strong class="font-semibold text-ink">TypeScript</strong>.
+      </p>
+      <p class="text-muted">
+        Mi enfoque es pragmático: software que funciona, código que otro puede mantener y una
+        experiencia de uso que no estorba.
+      </p>
     </div>
 
-    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:col-span-5 lg:grid-cols-1">
-      {
-        features.map((f, i) => (
-          <div
-            class="reveal flex items-start gap-4 rounded-xl border border-stone-200 bg-white p-5 transition-all hover:bg-stone-50 dark:border-surface-container-high dark:bg-surface-container-low dark:hover:bg-surface-container"
-            style={`--reveal-delay: ${i * 90}ms`}
-          >
-            <div class={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border ${tintBox[f.tint]}`}>
-              <Icon name={f.icon} size={22} />
-            </div>
-            <div class="flex flex-col">
-              <h3 class="mb-1 text-base font-semibold text-stone-900 dark:text-white">{f.title}</h3>
-              <p class="text-xs text-stone-600 sm:text-sm dark:text-on-surface-variant">{f.text}</p>
-            </div>
-          </div>
-        ))
-      }
-    </div>
+    <dl class="reveal divide-y divide-line border-y border-line" style="--d: 120ms">
+      {stack.map((s) => (
+        <div class="grid grid-cols-[8.5rem_1fr] gap-4 py-4">
+          <dt class="text-sm font-semibold text-muted">{s.group}</dt>
+          <dd>{s.items.join(', ')}</dd>
+        </div>
+      ))}
+    </dl>
   </div>
-</section>
+</Section>

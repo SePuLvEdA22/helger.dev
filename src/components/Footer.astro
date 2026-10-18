@@ -1,46 +1,16 @@
 ---
-import Icon from './Icon.astro';
 import { site } from '../data/site';
-
-const footerLink =
-  'text-stone-600 hover:text-orange-800 dark:text-on-surface-variant dark:hover:text-primary';
-const footerLinkSecondary =
-  'text-stone-600 hover:text-stone-600 dark:text-on-surface-variant dark:hover:text-secondary';
-
 const year = new Date().getFullYear();
 ---
 
-<footer class="relative z-10 w-full border-t border-stone-200 bg-white py-8 dark:border-surface-container-high dark:bg-surface-container-lowest">
-  <div class="mx-auto flex max-w-max-container flex-col items-center justify-between gap-6 px-margin-mobile md:flex-row lg:px-margin-desktop">
-    <div class="flex flex-col items-center gap-3 text-center sm:flex-row sm:text-left">
-      <span class="text-xs text-stone-600 dark:text-on-surface-variant">
-        © {year} {site.brand}. {site.name}. Todos los derechos reservados.
-      </span>
-    </div>
-    <nav class="flex flex-wrap items-center justify-center gap-x-4 gap-y-2" aria-label="Navegación secundaria">
-      <a href="#servicios" class={`font-mono text-xs transition-colors ${footerLink}`}>Servicios</a>
-      <a href="#proyectos" class={`font-mono text-xs transition-colors ${footerLink}`}>Proyectos</a>
-      <a href="#sobre-mi" class={`font-mono text-xs transition-colors ${footerLink}`}>Sobre mí</a>
-      <a href="#faq" class={`font-mono text-xs transition-colors ${footerLink}`}>FAQ</a>
-      <a href="#contacto" class={`font-mono text-xs transition-colors ${footerLink}`}>Contacto</a>
+<footer class="border-t border-line">
+  <div class="mx-auto flex max-w-page flex-col gap-3 px-5 py-8 text-sm text-muted sm:flex-row sm:items-center sm:justify-between sm:px-8">
+    <span>© {year} {site.name}</span>
+    <nav aria-label="Pie de página" class="flex gap-5">
+      <a href="#proyectos" class="hover:text-ink">Proyectos</a>
+      <a href="#sobre-mi" class="hover:text-ink">Sobre mí</a>
+      <a href="#freelance" class="hover:text-ink">Freelance</a>
+      <a href={site.github} target="_blank" rel="noopener noreferrer" class="hover:text-ink">GitHub</a>
     </nav>
-    <div class="flex items-center gap-4">
-      <a
-        href="#inicio"
-        class={`flex min-h-[44px] min-w-[44px] items-center justify-center gap-1 font-mono text-xs transition-colors ${footerLink}`}
-      >
-        <Icon name="arrow-up" size={16} />
-        <span>Arriba</span>
-      </a>
-      <a
-        href={site.github}
-        target="_blank"
-        rel="noopener noreferrer"
-        class={`flex min-h-[44px] min-w-[44px] items-center justify-center gap-1 font-mono text-xs transition-colors ${footerLinkSecondary}`}
-      >
-        <Icon name="terminal" size={16} />
-        <span>github</span>
-      </a>
-    </div>
   </div>
 </footer>

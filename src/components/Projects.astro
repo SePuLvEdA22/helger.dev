@@ -1,210 +1,63 @@
 ---
 import Icon from './Icon.astro';
+import Section from './Section.astro';
 import { projects, site } from '../data/site';
-import { accentText, accentDot } from '../utils/accent';
-
-const kickerColor = accentText;
-const dotColor = accentDot;
-
-const iconBox: Record<string, string> = {
-  primary:
-    'border-orange-700/25 bg-orange-700/10 text-orange-700 dark:border-primary/30 dark:bg-primary-container/20 dark:text-primary',
-  secondary:
-    'border-stone-400/40 bg-stone-500/10 text-stone-600 dark:border-secondary/30 dark:bg-secondary-container/20 dark:text-secondary',
-  tertiary:
-    'border-amber-800/25 bg-amber-800/10 text-amber-800 dark:border-tertiary/30 dark:bg-tertiary-container/20 dark:text-tertiary',
-};
-
-const repoSlug = (url: string) => {
-  try {
-    const parts = new URL(url).pathname.split('/').filter(Boolean);
-    return parts.slice(-2).join('/') || url;
-  } catch {
-    return url;
-  }
-};
 
 const [featured, ...rest] = projects;
+const ext = { target: '_blank', rel: 'noopener noreferrer' };
 ---
 
-<section id="proyectos" class="relative z-10 mx-auto w-full max-w-max-container scroll-mt-20 px-margin-mobile pt-12 pb-16 lg:px-margin-desktop lg:pt-16 lg:pb-24">
-  <div class="reveal mb-10 flex flex-col justify-between gap-4 md:flex-row md:items-end">
-    <div class="flex flex-col gap-1">
-      <span class="font-mono text-xs font-semibold uppercase tracking-widest text-stone-600 dark:text-secondary">02. / Portafolio</span>
-      <h2 class="text-2xl font-bold tracking-tight text-stone-900 sm:text-3xl lg:text-4xl dark:text-white">Proyectos Destacados</h2>
-      <p class="mt-1 max-w-xl text-sm text-stone-600 sm:text-base dark:text-on-surface-variant">
-        Una selección de trabajos recientes, implementaciones de producción y proyectos de código abierto.
-      </p>
-    </div>
-    <a
-      href={site.github}
-      target="_blank"
-      rel="noopener noreferrer"
-      class="inline-flex items-center gap-1.5 font-mono text-xs text-orange-800 transition-colors hover:text-orange-600 sm:text-sm dark:text-primary dark:hover:text-primary-fixed"
-    >
-      <span>Ver todos en GitHub</span>
-      <Icon name="arrow-right" size={16} />
-    </a>
-  </div>
-
-  <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-12">
-    {/* ── Proyecto principal: BodyFitGym ─────────────────────────── */}
-    <article
-      class="reveal flex flex-col overflow-hidden rounded-xl border border-stone-200 bg-white shadow-2xl md:col-span-2 lg:col-span-12 lg:flex-row dark:border-surface-container-high dark:bg-surface-container-low"
-    >
-      {/* Mock de telemetría: oscuro en dark, claro en light */}
-      <div
-        class="relative flex flex-col justify-between overflow-hidden border-b border-stone-200 bg-stone-100 p-5 sm:p-7 lg:w-7/12 lg:border-b-0 lg:border-r dark:border-surface-container-high dark:bg-surface-container-lowest"
-      >
-        <div class="mb-4 flex items-center justify-between rounded-lg border border-stone-200 bg-white px-4 py-2 pb-3 dark:border-surface-container-high dark:bg-surface-container-low">
-          <div class="flex items-center gap-2">
-            <span class="h-2.5 w-2.5 animate-pulse rounded-full bg-orange-600 dark:bg-primary"></span>
-            <span class="font-mono text-xs font-semibold text-stone-900 dark:text-white">BodyFitGym Control Station</span>
-          </div>
-          <span class="font-mono text-xs text-orange-700 dark:text-primary">COM3::SERIAL_CONNECTED</span>
-        </div>
-        <div class="space-y-2 rounded-xl border border-stone-200 bg-white p-4 font-mono text-xs dark:border-surface-container-high dark:bg-surface-container">
-          <div class="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 border-b border-stone-200 pb-1 text-[11px] text-stone-500 dark:border-surface-container-high/60 dark:text-on-surface-variant">
-            <span>STREAM: ARDUINO_MEGA_2560</span>
-            <span class="font-semibold text-orange-700 dark:text-primary">STATUS: OPERATIONAL 99.98%</span>
-          </div>
-          <div class="space-y-1.5 pt-1 text-[11px] sm:text-[12px]">
-            <div class="flex items-center gap-2 text-orange-700 dark:text-primary">
-              <span class="font-bold text-stone-500 dark:text-secondary">[OK]</span> Biometric Reader Initialized (FPM10A)
-            </div>
-            <div class="flex items-center gap-2 text-stone-600 dark:text-on-surface-variant">
-              <span class="font-bold text-amber-700 dark:text-tertiary">[SYNC]</span> SQLite Database Synced with Local Cache
-            </div>
-            <div class="flex items-center gap-2 text-orange-800 dark:text-primary-fixed">
-              <span class="font-bold text-stone-500 dark:text-secondary">[EVENT]</span> Card ID #98421 Verified: Acceso Autorizado (Torniquete Abierto 3s)
-            </div>
-            <div class="flex items-center gap-2 text-stone-600 dark:text-on-surface-variant">
-              <span class="font-bold">[POLL]</span> Relé 1 Activo -&gt; Pulso 500ms enviado a pasarela electromecánica
-            </div>
-          </div>
-        </div>
-        <div class="flex flex-wrap items-center gap-2 pt-4">
-          <span class="rounded border border-orange-700/20 bg-orange-700/10 px-2.5 py-1 font-mono text-xs text-orange-800 dark:border-primary/20 dark:bg-surface-container-high dark:text-primary">BaudRate: 9600</span>
-          <span class="rounded border border-stone-400/40 bg-stone-500/10 px-2.5 py-1 font-mono text-xs text-stone-600 dark:border-secondary/20 dark:bg-surface-container-high dark:text-secondary">IPC Multi-Process</span>
-          <span class="rounded border border-amber-800/25 bg-amber-800/10 px-2.5 py-1 font-mono text-xs text-amber-800 dark:border-tertiary/20 dark:bg-surface-container-high dark:text-tertiary">Low-Latency Relay</span>
-        </div>
-      </div>
-
-      <div class="flex flex-col justify-between bg-stone-50 p-6 sm:p-8 lg:w-5/12 dark:bg-surface-container">
-        <div>
-          <div class="mb-2 flex items-center gap-2">
-            <span class="rounded-full border border-orange-600/25 bg-orange-600/10 px-2 py-0.5 font-mono text-[11px] font-semibold uppercase text-orange-800 dark:border-primary/30 dark:bg-primary/10 dark:text-primary">
-              {featured.kicker}
-            </span>
-            <span class="font-mono text-[11px] text-stone-600 dark:text-on-surface-variant">Desktop + Hardware</span>
-          </div>
-          <h3 class="mb-1 text-2xl font-bold text-stone-900 dark:text-white">{featured.title}</h3>
-          <p class="mb-3 text-sm font-medium text-stone-600 dark:text-secondary">{featured.subtitle}</p>
-          <p class="mb-5 text-xs leading-relaxed text-stone-600 sm:text-sm dark:text-on-surface-variant">
-            {featured.description}
+<Section id="proyectos" eyebrow="Proyectos" title="Cosas que he construido">
+  {/* Destacado */}
+  <article class="reveal relative overflow-hidden rounded-3xl border border-line bg-surface p-7 sm:p-10 md:p-12">
+    <div class="stripes pointer-events-none absolute -right-10 -top-10 h-48 w-48 rounded-full opacity-70" aria-hidden="true"></div>
+    <div class="relative grid gap-8 md:grid-cols-[1fr_1.1fr] md:gap-12">
+      <div>
+        <p class="mb-3 text-sm font-semibold text-soft-ink">01 · Destacado</p>
+        <h3 class="text-4xl font-semibold tracking-tight sm:text-5xl">{featured.title}</h3>
+        <p class="mt-3 text-lg text-muted">{featured.summary}</p>
+        {featured.status && (
+          <p class="mt-6 inline-flex items-center gap-2 rounded-full bg-soft px-3 py-1 text-sm font-medium text-soft-ink">
+            <Icon name="check" size={16} /> {featured.status}
           </p>
-          <div class="mb-6 flex flex-wrap gap-1.5">
-            {
-              featured.tech.map((t) => (
-                <span class="rounded border border-stone-300 bg-stone-200/70 px-2 py-1 font-mono text-xs text-stone-700 dark:border-surface-container-highest dark:bg-surface-container-high dark:text-white">
-                  {t}
-                </span>
-              ))
-            }
+        )}
+      </div>
+      <div class="flex flex-col justify-between gap-8">
+        <p class="leading-relaxed">{featured.description}</p>
+        <div>
+          <p class="mb-5 text-sm text-muted">{featured.tags.join(' · ')}</p>
+          <div class="flex flex-wrap gap-6">
+            <a href={featured.codeUrl} {...ext} class="link">Ver código</a>
+            {featured.demoUrl && <a href={featured.demoUrl} {...ext} class="link">Ver demo</a>}
           </div>
-        </div>
-        <div class="flex flex-wrap items-center gap-3 pt-2">
-          <a
-            href={featured.codeUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center gap-2 rounded-xl bg-primary px-4 py-2.5 text-xs font-semibold text-on-primary shadow-md transition-all hover:bg-primary-fixed sm:text-sm"
-          >
-            <Icon name="code" size={18} />
-            <span>Ver Repositorio GitHub</span>
-            <Icon name="arrow-up-right" size={14} />
-          </a>
-          <span class="flex items-center gap-1 font-mono text-xs text-stone-600 dark:text-on-surface-variant">
-            <Icon name="verified" size={16} class="text-orange-600 dark:text-primary" />
-            {featured.badge}
-          </span>
         </div>
       </div>
-    </article>
+    </div>
+  </article>
 
-    {/* ── Proyectos secundarios ───────────────────── */}
-    {
-      rest.map((p, i) => (
-        <article
-          class="reveal flex flex-col justify-between rounded-xl border border-stone-200 bg-white p-5 shadow-lg transition-all hover:bg-stone-50 sm:p-6 lg:col-span-4 dark:border-surface-container-high dark:bg-surface-container-low dark:hover:bg-surface-container"
-          style={`--reveal-delay: ${i * 90}ms`}
-        >
-          <div>
-            <div class="relative mb-4 flex h-36 flex-col justify-between overflow-hidden rounded-lg border border-stone-200 bg-stone-100 p-4 dark:border-surface-container-high dark:bg-surface-container">
-              <div class="flex items-center justify-between">
-                <span class={`h-2 w-2 rounded-full ${dotColor[p.kickerColor]}`} />
-                <span class="truncate font-mono text-xs text-stone-600 dark:text-on-surface-variant">
-                  {repoSlug(p.codeUrl)}
-                </span>
-              </div>
-              <div class="flex items-center gap-3">
-                <div class={`flex h-10 w-10 items-center justify-center rounded border ${iconBox[p.kickerColor]}`}>
-                  <Icon name={p.icon} size={20} />
-                </div>
-                <div class="min-w-0">
-                  <div class="truncate font-mono text-xs font-semibold text-stone-900 dark:text-white">{p.title}</div>
-                  <div class="truncate font-mono text-[11px] text-stone-600 dark:text-on-surface-variant">{p.tech.slice(0, 2).join(' • ')}</div>
-                </div>
-              </div>
-              <div class="flex items-center gap-2 font-mono text-[11px] text-stone-600 dark:text-on-surface-variant">
-                <span class="inline-flex items-center gap-1">
-                  <span class={`h-1.5 w-1.5 rounded-full ${dotColor[p.kickerColor]}`} aria-hidden="true" />
-                  {p.demoUrl ? 'Demo en vivo' : 'Código abierto'}
-                </span>
-              </div>
-            </div>
-            <span class={`font-mono text-[11px] font-semibold uppercase tracking-wider ${kickerColor[p.kickerColor]}`}>
-              {p.kicker}
-            </span>
-            <h3 class="mt-1 text-xl font-bold text-stone-900 dark:text-white">{p.title}</h3>
-            <p class="mb-2 text-xs font-medium text-stone-600 dark:text-on-surface-variant">{p.subtitle}</p>
-            <p class="mb-3 text-xs leading-relaxed text-stone-600 sm:text-sm dark:text-on-surface-variant">{p.description}</p>
-            {p.outcome && (
-              <p class="mb-4 flex items-center gap-1.5 font-mono text-[11px] font-medium text-orange-800 dark:text-primary">
-                <Icon name="check" size={14} />
-                <span>{p.outcome}</span>
-              </p>
-            )}
-            <div class="mb-4 flex flex-wrap gap-1.5">
-              {p.tech.map((t) => (
-                <span class="rounded bg-stone-200/80 px-2 py-0.5 font-mono text-xs text-stone-700 dark:bg-surface-container-high dark:text-white">{t}</span>
-              ))}
-            </div>
-          </div>
-          <div class="flex items-center justify-between border-t border-stone-200 pt-3 dark:border-surface-container-high/60">
-            <a
-              href={p.codeUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="inline-flex items-center gap-1 text-xs font-semibold text-orange-800 transition-colors hover:text-orange-600 dark:text-primary dark:hover:text-primary-fixed"
-            >
-              <Icon name="code" size={16} />
-              <span>Código</span>
-            </a>
-            {p.demoUrl && (
-              <a
-                href={p.demoUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="inline-flex items-center gap-1 text-xs font-semibold text-stone-600 transition-colors hover:text-stone-600 dark:text-secondary dark:hover:text-secondary-fixed"
-              >
-                <span>{p.demoLabel}</span>
-                <Icon name="arrow-up-right" size={14} />
-              </a>
-            )}
-          </div>
-        </article>
-      ))
-    }
+  {/* Resto */}
+  <div class="mt-16 grid gap-x-12 gap-y-14 md:grid-cols-2">
+    {rest.map((p, i) => (
+      <article class="reveal border-t border-ink/80 pt-6" style={`--d: ${(i % 2) * 90}ms`}>
+        {p.image && (
+          <img src={p.image} alt={`Captura de ${p.title}`} loading="lazy" class="mb-6 aspect-[16/10] w-full rounded-xl border border-line object-cover object-top" />
+        )}
+        <div class="flex items-baseline justify-between gap-4">
+          <h3 class="text-3xl font-semibold tracking-tight">{p.title}</h3>
+          <span class="text-sm tabular-nums text-muted">{String(i + 2).padStart(2, '0')}</span>
+        </div>
+        <p class="mt-2 font-medium">{p.summary}</p>
+        <p class="mt-3 leading-relaxed text-muted">{p.description}</p>
+        <p class="mt-4 text-sm text-muted">{p.tags.join(' · ')}</p>
+        <div class="mt-5 flex flex-wrap gap-6">
+          {p.demoUrl && <a href={p.demoUrl} {...ext} class="link">Ver demo</a>}
+          <a href={p.codeUrl} {...ext} class="link">Código</a>
+        </div>
+      </article>
+    ))}
   </div>
-</section>
+
+  <p class="reveal mt-16 text-muted">
+    Más en <a href={site.github} target="_blank" rel="noopener noreferrer" class="link text-ink">github.com/{site.githubHandle}</a>
+  </p>
+</Section>
