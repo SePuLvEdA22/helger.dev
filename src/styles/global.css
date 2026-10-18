@@ -64,8 +64,11 @@ p {
   border-radius: 4px;
 }
 
-/* Link de texto con subrayado coral que crece al hover */
+/* Link de texto con subrayado coral que crece al hover.
+   padding/margin negativos: área táctil ~44px sin mover el layout */
 .link {
+  padding-block: 10px;
+  margin-block: -10px;
   font-weight: 600;
   text-decoration: underline;
   text-decoration-color: var(--color-accent);
