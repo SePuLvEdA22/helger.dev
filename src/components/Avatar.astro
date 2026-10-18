@@ -12,27 +12,27 @@
     <defs>
       <clipPath id="avatar-clip"><circle cx="200" cy="200" r="180" /></clipPath>
       <pattern id="av-stubble" width="5" height="5" patternUnits="userSpaceOnUse">
-        <circle cx="2.5" cy="2.5" r="0.9" fill="var(--color-ink)" />
+        <circle cx="2.5" cy="2.5" r="0.9" fill="var(--av-ink)" />
       </pattern>
     </defs>
     <circle class="av-circle" cx="200" cy="200" r="180" fill="var(--color-soft)" stroke="var(--color-line)" stroke-width="2" />
 
-    <g clip-path="url(#avatar-clip)" stroke="var(--color-ink)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+    <g clip-path="url(#avatar-clip)" stroke="var(--av-ink)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
       <g class="av-in">
         <g class="av-breath">
           {/* Cuerpo: camiseta negra cuello redondo. Se mueve poco */}
           <g class="av-layer" style="--k: 4">
-            <path d="M176 284 L176 330 Q200 346 224 330 L224 284 Z" fill="var(--color-surface)" />
-            <path d="M62 430 Q70 336 176 322 Q200 336 224 322 Q330 336 338 430 Z" fill="var(--color-ink)" />
+            <path d="M176 284 L176 330 Q200 346 224 330 L224 284 Z" fill="var(--av-face)" />
+            <path d="M62 430 Q70 336 176 322 Q200 336 224 322 Q330 336 338 430 Z" fill="var(--av-ink)" />
             <path d="M174 326 Q200 344 226 326" fill="none" stroke="var(--color-soft-ink)" stroke-width="3" />
           </g>
 
           {/* Cabeza: gira un poco más */}
           <g class="av-layer av-tilt" style="--k: 9">
-            <ellipse cx="128" cy="218" rx="12" ry="19" fill="var(--color-surface)" />
-            <ellipse cx="272" cy="218" rx="12" ry="19" fill="var(--color-surface)" />
+            <ellipse cx="128" cy="218" rx="12" ry="19" fill="var(--av-face)" />
+            <ellipse cx="272" cy="218" rx="12" ry="19" fill="var(--av-face)" />
             {/* Cara ovalada con mandíbula marcada */}
-            <path d="M130 190 Q128 268 166 296 Q200 314 234 296 Q272 268 270 190 Q268 124 200 120 Q132 124 130 190 Z" fill="var(--color-surface)" />
+            <path d="M130 190 Q128 268 166 296 Q200 314 234 296 Q272 268 270 190 Q268 124 200 120 Q132 124 130 190 Z" fill="var(--av-face)" />
 
             {/* Rasgos: la capa más cercana, mayor desplazamiento */}
             <g class="av-layer" style="--k: 7">
@@ -44,8 +44,8 @@
 
               <g class="av-layer" style="--k: 4">
                 <g class="av-blink">
-                  <circle cx="170" cy="212" r="7" fill="var(--color-ink)" stroke="none" />
-                  <circle cx="230" cy="212" r="7" fill="var(--color-ink)" stroke="none" />
+                  <circle cx="170" cy="212" r="7" fill="var(--av-ink)" stroke="none" />
+                  <circle cx="230" cy="212" r="7" fill="var(--av-ink)" stroke="none" />
                 </g>
               </g>
 
@@ -57,14 +57,14 @@
                 <path d="M144 202 L132 198" stroke-width="5" />
                 <path d="M256 202 L268 198" stroke-width="5" />
               </g>
-              <path class="av-glint" d="M150 212 L157 201 M212 212 L219 201" fill="none" stroke="var(--color-soft)" stroke-width="4" />
+              <path class="av-glint" d="M150 212 L157 201 M212 212 L219 201" fill="none" stroke="var(--av-glint)" stroke-width="4" />
 
               <path class="av-brow" d="M146 180 Q166 174 188 178" fill="none" stroke-width="8" />
               <path class="av-brow" d="M212 178 Q234 174 254 180" fill="none" stroke-width="8" />
             </g>
 
             {/* Pelo rizado: volumen arriba, lados cortos y rizos sobre la frente */}
-            <g fill="var(--color-ink)" stroke="none">
+            <g fill="var(--av-ink)" stroke="none">
               <path d="M124 206 Q116 150 146 122 Q172 100 200 102 Q240 100 260 122 Q286 150 276 206 Q268 172 250 160 Q200 150 150 160 Q132 172 124 206 Z" />
               <circle cx="130" cy="196" r="11" />
               <circle cx="132" cy="172" r="16" />
@@ -101,6 +101,10 @@
   .avatar {
     --mx: 0;
     --my: 0;
+    /* Colores propios: la ilustración no se invierte en modo oscuro */
+    --av-ink: #151a3d;
+    --av-face: #fffdf9;
+    --av-glint: #cfe8e6;
   }
   .av-layer {
     transform: translate(calc(var(--mx) * var(--k) * 1px), calc(var(--my) * var(--k) * 0.8px));

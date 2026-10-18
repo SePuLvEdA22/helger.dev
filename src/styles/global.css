@@ -18,6 +18,20 @@
   --container-page: 70rem;
 }
 
+/* ── Modo oscuro: mismos tokens, otros valores. data-theme lo pone BaseLayout ── */
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --color-bg: #121430;
+  --color-surface: #1a1d3d;
+  --color-ink: #f1ede4;
+  --color-muted: #a6aac4;
+  --color-line: #2e3260;
+  --color-accent: #ff6a55;
+  --color-accent-ink: #ff9585;
+  --color-soft: #1f4b52;
+  --color-soft-ink: #8fd6ce;
+}
+
 /* ── Base ── */
 :root {
   color-scheme: light;
@@ -100,4 +114,10 @@ p {
   html { scroll-behavior: auto; }
   .rise { animation: none; }
   .js .reveal { opacity: 1; transform: none; transition: none; }
+}
+
+/* Icono del botón de tema: luna en claro, sol en oscuro */
+[data-theme='dark'] .theme-icon-moon,
+:root:not([data-theme='dark']) .theme-icon-sun {
+  display: none;
 }
