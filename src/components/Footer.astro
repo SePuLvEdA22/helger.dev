@@ -6,11 +6,11 @@ const year = new Date().getFullYear();
 <footer class="border-t border-line">
   <div class="mx-auto flex max-w-page flex-col gap-3 px-5 py-8 text-sm text-muted sm:flex-row sm:items-center sm:justify-between sm:px-8">
     <span>© {year} {site.name}</span>
-    <nav aria-label="Pie de página" class="flex gap-5">
-      <a href="#proyectos" class="hover:text-ink">Proyectos</a>
-      <a href="#sobre-mi" class="hover:text-ink">Sobre mí</a>
-      <a href="#freelance" class="hover:text-ink">Freelance</a>
-      <a href={site.github} target="_blank" rel="noopener noreferrer" class="hover:text-ink">GitHub</a>
+    <nav aria-label="Pie de página" class="-mx-2 flex flex-wrap">
+      <a href="#proyectos" class="whitespace-nowrap px-2 py-2.5 hover:text-ink">Proyectos</a>
+      <a href="#sobre-mi" class="whitespace-nowrap px-2 py-2.5 hover:text-ink">Sobre mí</a>
+      <a href="#freelance" class="whitespace-nowrap px-2 py-2.5 hover:text-ink">Freelance</a>
+      <a href={site.github} target="_blank" rel="noopener noreferrer" class="whitespace-nowrap px-2 py-2.5 hover:text-ink">GitHub</a>
     </nav>
   </div>
 </footer>
