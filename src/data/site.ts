@@ -8,9 +8,9 @@ export const site = {
     'Construyo aplicaciones web, de escritorio y sistemas conectados a hardware. Hoy trabajo como desarrollador y acepto proyectos freelance seleccionados.',
   location: 'Cúcuta, Colombia',
   timezone: 'GMT-5',
-  // PENDIENTE: confirmar dominio final (debe coincidir con `site` en astro.config.mjs)
-  url: 'https://helger.dev',
-  ogImage: '/og-image.svg',
+  // Si conectas un dominio propio, cámbialo aquí, en astro.config.mjs y en public/robots.txt
+  url: 'https://helger-dev.vercel.app',
+  ogImage: '/og-image.png',
   github: 'https://github.com/SePuLvEdA22',
   githubHandle: 'SePuLvEdA22',
   linkedin: '', // PENDIENTE: ej. https://www.linkedin.com/in/tu-usuario. Vacío = se oculta.
