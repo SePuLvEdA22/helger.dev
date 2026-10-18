@@ -1,5 +1,6 @@
 ---
 import Icon from './Icon.astro';
+import Avatar from './Avatar.astro';
 import { site } from '../data/site';
 ---
 
@@ -26,12 +27,5 @@ import { site } from '../data/site';
     </div>
   </div>
 
-  {/* Retrato: monograma provisional hasta tener foto */}
-  <div class="rise relative mx-auto aspect-square w-full max-w-[14rem] md:max-w-[22rem]" style="--d: 200ms" aria-hidden="true">
-    <div class="dots absolute -right-4 -top-4 h-2/3 w-2/3 rounded-full"></div>
-    <div class="stripes absolute -bottom-3 -left-3 h-1/3 w-1/3 rounded-full"></div>
-    <div class="relative flex h-full w-full items-center justify-center rounded-full border border-line bg-soft">
-      <span class="font-display text-6xl font-medium italic text-soft-ink md:text-8xl">HS</span>
-    </div>
-  </div>
+  <div class="rise" style="--d: 200ms"><Avatar /></div>
 </section>
