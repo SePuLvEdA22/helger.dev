@@ -1,0 +1,62 @@
+---
+import Icon from './Icon.astro';
+import Section from './Section.astro';
+import { services, processSteps, faqs } from '../data/site';
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.question,
+    acceptedAnswer: { '@type': 'Answer', text: f.answer },
+  })),
+};
+---
+
+<Section
+  id="freelance"
+  eyebrow="Freelance"
+  title="¿Tienes un proyecto en mente?"
+  lead="Además de mi trabajo actual, tomo algunos proyectos al año. Precio cerrado, plazo definido y el código queda en tus manos."
+  class="border-y border-line bg-surface"
+>
+  <div class="grid gap-x-12 gap-y-10 sm:grid-cols-2">
+    {services.map((s, i) => (
+      <div class="reveal" style={`--d: ${(i % 2) * 90}ms`}>
+        <h3 class="text-2xl font-semibold">{s.title}</h3>
+        <p class="mt-2 text-muted">{s.text}</p>
+      </div>
+    ))}
+  </div>
+
+  <div class="mt-20 grid gap-14 md:grid-cols-2 md:gap-20">
+    <div class="reveal">
+      <h3 class="mb-6 text-2xl font-semibold">Cómo trabajo</h3>
+      <ol class="space-y-5">
+        {processSteps.map((step, i) => (
+          <li class="flex gap-4">
+            <span class="font-display text-2xl font-semibold italic leading-none text-accent">{i + 1}</span>
+            <span class="text-muted">{step}</span>
+          </li>
+        ))}
+      </ol>
+    </div>
+
+    <div class="reveal" style="--d: 120ms">
+      <h3 class="mb-6 text-2xl font-semibold">Preguntas frecuentes</h3>
+      <div class="divide-y divide-line border-y border-line">
+        {faqs.map((f) => (
+          <details class="group">
+            <summary class="flex min-h-[48px] cursor-pointer list-none items-center justify-between gap-4 py-4 font-medium [&::-webkit-details-marker]:hidden">
+              {f.question}
+              <Icon name="arrow-down" size={18} class="shrink-0 text-muted transition-transform group-open:rotate-180" />
+            </summary>
+            <p class="pb-5 text-muted">{f.answer}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </div>
+  <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+</Section>

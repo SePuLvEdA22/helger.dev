@@ -1,239 +1,30 @@
 ---
-import Icon from './Icon.astro';
 import { site } from '../data/site';
 
 const links = [
-  { href: '#inicio', label: 'Inicio', path: 'inicio' },
-  { href: '#servicios', label: 'Servicios', path: 'servicios' },
-  { href: '#proyectos', label: 'Proyectos', path: 'proyectos' },
-  { href: '#sobre-mi', label: 'Sobre mí', path: 'sobre-mi' },
-  { href: '#habilidades', label: 'Habilidades', path: 'habilidades' },
-  { href: '#faq', label: 'FAQ', path: 'faq' },
-  { href: '#contacto', label: 'Contacto', path: 'contacto' }
+  { href: '#proyectos', label: 'Proyectos' },
+  { href: '#sobre-mi', label: 'Sobre mí' },
+  { href: '#freelance', label: 'Freelance' },
 ];
-
-// Clases de estado del scroll-spy. Se alternan con classList (nunca se
-// reescribe className) para no romper las clases base de layout.
-// NOTA: mismo font-weight en ambos estados para que el pill activo no
-// cambie de ancho y se salga del contenedor (el activo se distingue por fondo).
-const ACTIVE = 'font-medium bg-primary text-on-primary shadow-sm';
-const INACTIVE =
-  'font-medium text-stone-600 hover:text-stone-900 hover:bg-stone-200/70 dark:text-on-surface-variant dark:hover:text-white dark:hover:bg-surface-container-high';
-
-// Botones de icono del header (tema, GitHub, menú) en ambos modos.
-const ICON_BTN =
-  'min-h-[44px] min-w-[44px] border-stone-300/70 bg-stone-200/60 text-stone-600 hover:bg-stone-300 hover:text-stone-900 dark:border-surface-container-high/50 dark:bg-surface-container-low dark:text-on-surface-variant dark:hover:bg-surface-container-high dark:hover:text-on-surface';
 ---
 
-<header
-  class="fixed top-0 z-50 w-full border-b border-stone-200 bg-[#f6f3ec]/85 shadow-lg backdrop-blur-xl dark:border-surface-container-high/60 dark:bg-surface/85"
->
-  <div id="scroll-progress" aria-hidden="true" class="absolute inset-x-0 bottom-0 h-0.5 origin-left scale-x-0 bg-primary"></div>
-  <div
-    class="mx-auto flex h-16 max-w-max-container items-center justify-between gap-2 px-margin-mobile sm:gap-4 lg:px-margin-desktop"
-  >
-    <a
-      href="#inicio"
-      class="group flex min-w-0 items-center gap-2.5"
-      aria-label="Ir al inicio"
-    >
-      <span
-        class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-orange-700/30 bg-orange-700/10 font-mono text-sm font-bold text-orange-800 shadow-sm transition-transform group-hover:scale-105 dark:border-primary/30 dark:bg-surface-container-low dark:text-primary"
-        aria-hidden="true"
-      >
-        &gt;_
-      </span>
-      <span class="flex min-w-0 flex-col leading-tight">
-        <span class="truncate font-display text-lg font-bold tracking-tight text-stone-900 dark:text-white">{site.brand}</span>
-        <span lang="en" class="truncate font-mono text-[11px] text-orange-700/90 dark:text-primary/80">{site.role}</span>
-      </span>
+<header class="sticky top-0 z-50 border-b border-line/70 bg-bg/85 backdrop-blur-md">
+  <div class="mx-auto flex h-16 max-w-page items-center justify-between gap-4 px-5 sm:px-8">
+    <a href="#inicio" class="font-display text-xl font-semibold tracking-tight">
+      {site.name}<span class="text-accent">.</span>
     </a>
-
-    {/* Nav desktop solo en xl: en lg (1024–1280px) brand + 7 links + acciones no caben */}
-    <nav
-      class="hidden min-w-0 items-center gap-1 rounded-full border border-stone-300/70 bg-stone-200/50 p-1.5 xl:flex dark:border-surface-container-high/60 dark:bg-surface-container-lowest/80"
-      aria-label="Navegación principal"
-    >
-      {
-        links.map((l, i) => (
-          <a
-            href={l.href}
-            data-path={l.path}
-            data-active={i === 0 ? 'true' : 'false'}
-            aria-current={i === 0 ? 'page' : undefined}
-            class={`nav-item inline-flex min-h-[40px] shrink-0 items-center whitespace-nowrap rounded-full px-3 py-2 text-sm transition-colors ${i === 0 ? ACTIVE : INACTIVE}`}
-          >
-            {l.label}
-          </a>
-        ))
-      }
-    </nav>
-
-    <div class="flex shrink-0 items-center gap-2">
-      <button
-        id="theme-toggle"
-        type="button"
-        aria-label="Cambiar entre modo oscuro y claro"
-        class={`flex h-9 w-9 items-center justify-center rounded-xl border transition-all ${ICON_BTN}`}
-      >
-        <span id="theme-icon-moon"><Icon name="moon" size={18} /></span>
-        <span id="theme-icon-sun" class="hidden"><Icon name="sun" size={18} /></span>
-      </button>
-      <a
-        href={site.github}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Perfil de GitHub"
-        class={`hidden h-9 w-9 items-center justify-center rounded-xl border transition-all min-[420px]:flex ${ICON_BTN}`}
-      >
-        <Icon name="github" size={18} />
-      </a>
+    <nav aria-label="Principal" class="flex items-center gap-1 sm:gap-2">
+      {links.map((l) => (
+        <a href={l.href} class="hidden rounded-md px-3 py-2 text-sm font-medium text-muted transition-colors hover:text-ink md:block">
+          {l.label}
+        </a>
+      ))}
       <a
         href="#contacto"
-        class="hidden min-h-[44px] items-center gap-1.5 whitespace-nowrap rounded-xl border border-orange-700/30 bg-orange-700/10 px-3.5 text-xs font-semibold tracking-wide text-orange-800 transition-all hover:bg-orange-600 hover:text-white md:inline-flex dark:border-primary/40 dark:bg-primary/15 dark:text-primary dark:hover:bg-primary dark:hover:text-on-primary"
+        class="ml-2 inline-flex min-h-[40px] items-center rounded-full bg-ink px-4 text-sm font-semibold text-bg transition-colors hover:bg-accent-ink"
       >
-        <Icon name="send" size={15} />
-        <span>Contactar</span>
+        Contacto
       </a>
-      <button
-        id="menu-toggle"
-        type="button"
-        aria-label="Abrir menú"
-        aria-expanded="false"
-        aria-controls="mobile-menu"
-        class={`flex h-9 w-9 items-center justify-center rounded-xl border transition-all xl:hidden ${ICON_BTN}`}
-      >
-        <span id="menu-icon-open"><Icon name="menu" size={18} /></span>
-        <span id="menu-icon-close" class="hidden"><Icon name="x" size={18} /></span>
-      </button>
-    </div>
+    </nav>
   </div>
-
-  <nav id="mobile-menu" class="hidden border-t border-stone-200 px-margin-mobile py-3 xl:hidden dark:border-surface-container-high/60" aria-label="Navegación móvil">
-    <div class="flex flex-col gap-1">
-      {
-        links.map((l) => (
-          <a
-            href={l.href}
-            data-path={l.path}
-            class="mobile-link flex min-h-[44px] items-center rounded-lg px-3 py-2 text-sm font-medium text-stone-600 transition-colors hover:bg-stone-200 hover:text-stone-900 dark:text-on-surface-variant dark:hover:bg-surface-container-high dark:hover:text-white"
-          >
-            {l.label}
-          </a>
-        ))
-      }
-    </div>
-  </nav>
 </header>
-
-<script is:inline define:vars={{ ACTIVE, INACTIVE }}>
-  document.addEventListener('DOMContentLoaded', () => {
-    const btn = document.getElementById('menu-toggle');
-    const menu = document.getElementById('mobile-menu');
-    const iconOpen = document.getElementById('menu-icon-open');
-    const iconClose = document.getElementById('menu-icon-close');
-    const setMenu = (open) => {
-      menu?.classList.toggle('hidden', !open);
-      iconOpen?.classList.toggle('hidden', open);
-      iconClose?.classList.toggle('hidden', !open);
-      btn?.setAttribute('aria-expanded', String(open));
-      btn?.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
-    };
-    btn?.addEventListener('click', () => {
-      setMenu(menu?.classList.contains('hidden') ?? true);
-    });
-    menu?.querySelectorAll('a').forEach((a) => {
-      a.addEventListener('click', () => {
-        setMenu(false);
-        btn?.focus();
-      });
-    });
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && menu && !menu.classList.contains('hidden')) {
-        setMenu(false);
-        btn?.focus();
-      }
-    });
-
-    // Scroll-spy con IntersectionObserver: marca la sección que cruza la
-    // banda central del viewport. A diferencia del cálculo con offsetTop,
-    // funciona también con la última sección aunque el pie de página sea
-    // más bajo que el viewport (caso Contacto).
-    const activeClasses = ACTIVE.split(' ');
-    const inactiveClasses = INACTIVE.split(' ');
-    const navLinks = Array.from(
-      document.querySelectorAll('header nav[aria-label="Navegación principal"] a.nav-item')
-    );
-    const setActive = (path) => {
-      navLinks.forEach((link) => {
-        const linkPath = link.getAttribute('data-path') || (link.getAttribute('href') || '').replace('#', '');
-        const isActive = linkPath === path;
-        link.classList.remove(...(isActive ? inactiveClasses : activeClasses));
-        link.classList.add(...(isActive ? activeClasses : inactiveClasses));
-        if (isActive) link.setAttribute('aria-current', 'page');
-        else link.removeAttribute('aria-current');
-      });
-    };
-    // Feedback inmediato al hacer click + bloqueo de navegación: durante el
-    // scroll suave el observer ignora las secciones de paso para que el
-    // activo no "rebote" por Inicio, Sobre mí, etc. hasta llegar al destino.
-    let navTarget = null;
-    let navTimer = null;
-    const releaseNavLock = () => {
-      navTarget = null;
-      if (navTimer) clearTimeout(navTimer);
-      navTimer = null;
-    };
-    navLinks.forEach((link) => {
-      link.addEventListener('click', () => {
-        const path = link.getAttribute('data-path') || (link.getAttribute('href') || '').replace('#', '');
-        releaseNavLock();
-        navTarget = path;
-        setActive(path);
-        // Red de seguridad por si el destino nunca intersecta.
-        navTimer = setTimeout(releaseNavLock, 2500);
-      });
-    });
-    // Si el usuario toma el control manual, se libera el bloqueo.
-    window.addEventListener('wheel', releaseNavLock, { passive: true });
-    window.addEventListener('touchmove', releaseNavLock, { passive: true });
-    const sections = document.querySelectorAll('main section[id]');
-    if ('IntersectionObserver' in window && sections.length > 0) {
-      const spy = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (!entry.isIntersecting) return;
-            const id = entry.target.getAttribute('id') || '';
-            // Con bloqueo activo solo el destino puede tomar el activo;
-            // al llegar se libera para volver al modo libre.
-            if (navTarget) {
-              if (id === navTarget) {
-                setActive(id);
-                releaseNavLock();
-              }
-              return;
-            }
-            setActive(id);
-          });
-        },
-        { rootMargin: '-40% 0px -55% 0px', threshold: 0 }
-      );
-      sections.forEach((s) => spy.observe(s));
-    } else {
-      // Fallback sin IntersectionObserver: primera sección visible.
-      const onScroll = () => {
-        if (navTarget) return;
-        let current = '';
-        const pos = window.scrollY + 180;
-        sections.forEach((s) => {
-          if (pos >= s.offsetTop && pos < s.offsetTop + s.offsetHeight) {
-            current = s.getAttribute('id') || '';
-          }
-        });
-        if (current) setActive(current);
-      };
-      window.addEventListener('scroll', onScroll, { passive: true });
-      onScroll();
-    }
-  });
-</script>
