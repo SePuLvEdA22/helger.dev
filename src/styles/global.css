@@ -176,7 +176,7 @@ p { text-wrap: pretty; }
 .ascii pre {
   margin: 0;
   font-family: var(--font-mono);
-  font-size: calc(100cqi / var(--cols) / 0.6);
+  font-size: calc(100cqi / var(--cols) / 0.6 * var(--fit, 1));
   line-height: 1.15;
   white-space: pre;
   font-variant-ligatures: none;

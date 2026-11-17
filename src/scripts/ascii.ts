@@ -148,10 +148,10 @@ function diagram(cols: number, rows: number, nodes: Node[], edges: Edge[], speed
 
   const drawStatic = (g: Grid) => {
     for (const nd of nodes) {
-      g.text(nd.r, nd.c, '┌' + '─'.repeat(nd.w - 2) + '┐');
+      g.text(nd.r, nd.c, '+' + '-'.repeat(nd.w - 2) + '+');
       const pad = nd.w - 2 - nd.label.length;
-      g.text(nd.r + 1, nd.c, '│' + ' '.repeat(Math.floor(pad / 2)) + nd.label + ' '.repeat(Math.ceil(pad / 2)) + '│');
-      g.text(nd.r + 2, nd.c, '└' + '─'.repeat(nd.w - 2) + '┘');
+      g.text(nd.r + 1, nd.c, '|' + ' '.repeat(Math.floor(pad / 2)) + nd.label + ' '.repeat(Math.ceil(pad / 2)) + '|');
+      g.text(nd.r + 2, nd.c, '+' + '-'.repeat(nd.w - 2) + '+');
     }
     paths.forEach((cells, ei) => {
       cells.forEach(([r, c], k) => {
@@ -159,12 +159,7 @@ function diagram(cols: number, rows: number, nodes: Node[], edges: Edge[], speed
         const a = prev ?? next, b = next ?? prev;
         const horiz = a[0] === r && b[0] === r;
         const vert = a[1] === c && b[1] === c;
-        let ch = horiz ? '─' : vert ? '│' : '┼';
-        if (!horiz && !vert && prev && next) {
-          const up = prev[0] < r || next[0] < r, down = prev[0] > r || next[0] > r;
-          const left = prev[1] < c || next[1] < c, right = prev[1] > c || next[1] > c;
-          ch = down && right ? '┌' : down && left ? '┐' : up && right ? '└' : up && left ? '┘' : '┼';
-        }
+        let ch = horiz ? '-' : vert ? '|' : '+';
         g.set(r, c, ch);
       });
       const lab = edges[ei].label;
@@ -186,7 +181,7 @@ function diagram(cols: number, rows: number, nodes: Node[], edges: Edge[], speed
           const p = (t * speed * (12 / cells.length) + k / count + ei * 0.37) % 1;
           const idx = Math.floor((dir > 0 ? p : 1 - p) * cells.length);
           const [r, c] = cells[Math.min(cells.length - 1, idx)];
-          g.set(r, c, '■', true);
+          g.set(r, c, '#', true);
           // Al llegar, la caja destino se enciende
           if (p > 0.9) {
             const end = dir > 0 ? cells[cells.length - 1] : cells[0];
@@ -284,10 +279,10 @@ function phone(): Anim {
     still: 0.8,
     frame(t) {
       const g = new Grid(cols, rows);
-      g.text(0, 0, '╭' + '─'.repeat(cols - 2) + '╮');
-      for (let r = 1; r < rows - 1; r++) { g.set(r, 0, '│'); g.set(r, cols - 1, '│'); }
-      g.text(rows - 1, 0, '╰' + '─'.repeat(cols - 2) + '╯');
-      g.text(1, 9, '(  ●  )');
+      g.text(0, 0, '.' + '-'.repeat(cols - 2) + '.');
+      for (let r = 1; r < rows - 1; r++) { g.set(r, 0, '|'); g.set(r, cols - 1, '|'); }
+      g.text(rows - 1, 0, "'" + '-'.repeat(cols - 2) + "'");
+      g.text(1, 9, '(  o  )');
       g.text(3, 3, 'GASTOS · NOV');
       const total = Math.round(1240 + Math.sin(t * 0.7) * 85);
       g.text(5, 3, '$ ' + total.toLocaleString('es-CO') + '.000', true);
@@ -299,11 +294,11 @@ function phone(): Anim {
         return h;
       });
       hs.forEach((h, i) => {
-        for (let k = 0; k < h; k++) g.text(base - k, 3 + i * 3, '██', i === maxI);
+        for (let k = 0; k < h; k++) g.text(base - k, 3 + i * 3, '##', i === maxI);
       });
-      g.text(base + 1, 2, '─'.repeat(cols - 4));
+      g.text(base + 1, 2, '-'.repeat(cols - 4));
       g.text(base + 2, 3, 'L  M  M  J  V  S');
-      g.text(rows - 2, 10, '──────');
+      g.text(rows - 2, 10, '------');
       return g.out();
     },
   };
@@ -317,7 +312,7 @@ function terminal(): Anim {
     '$ git checkout -b tu-proyecto',
     "  Switched to a new branch 'tu-proyecto'",
     '$ npm run ship',
-    '  ✓ desplegado · código en tu repo',
+    '  ok: desplegado · código en tu repo',
   ];
   const cols = 46, rows = lines.length + 1;
   const total = lines.reduce((a, l) => a + l.length, 0);
@@ -332,14 +327,14 @@ function terminal(): Anim {
       for (const l of lines) {
         const shown = l.slice(0, Math.max(0, chars));
         if (shown.startsWith('$')) { g.set(r, 0, '$', true); g.text(r, 1, shown.slice(1)); }
-        else g.text(r, 0, shown, shown.includes('✓'));
+        else g.text(r, 0, shown, shown.includes('ok:'));
         if (chars > 0) { cr = r; cc = shown.length; }
         chars -= l.length;
         r++;
         if (chars <= 0) break;
       }
       if (chars > 0) { cr = lines.length; cc = 0; g.set(cr, 0, '$', true); cc = 2; }
-      if (Math.floor(t * 2.4) % 2 === 0) g.set(cr, cc, '█', true);
+      if (Math.floor(t * 2.4) % 2 === 0) g.set(cr, cc, '_', true);
       return g.out();
     },
   };
@@ -350,11 +345,27 @@ const registry: Record<string, () => Anim> = { stack, systemPlan, gymPlan, radar
 // ── Montaje ──────────────────────────────────────────────────────────────────
 type Live = { anim: Anim; base: HTMLElement; hot: HTMLElement; visible: boolean; last: number };
 
+// Red de seguridad: si una línea mide más que el recuadro (fuente aún sin
+// cargar o con otro ancho), se reduce el tamaño para que nunca se corte.
+function fit(el: HTMLElement) {
+  const pre = el.querySelector<HTMLElement>('.ascii-base');
+  if (!pre || !el.clientWidth) return;
+  el.style.removeProperty('--fit');
+  const over = pre.scrollWidth / el.clientWidth;
+  if (over > 1.002) el.style.setProperty('--fit', (1 / over).toFixed(4));
+}
+
 export function mountAscii() {
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const live: Live[] = [];
 
-  document.querySelectorAll<HTMLElement>('[data-ascii]').forEach((el) => {
+  const all = [...document.querySelectorAll<HTMLElement>('[data-ascii]')];
+  const fitAll = () => all.forEach(fit);
+  document.fonts?.ready.then(fitAll);
+  const ro = new ResizeObserver(fitAll);
+  all.forEach((el) => ro.observe(el));
+
+  all.forEach((el) => {
     const make = registry[el.dataset.ascii || ''];
     if (!make) return;
     const anim = make();
