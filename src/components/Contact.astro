@@ -1,39 +1,53 @@
 ---
 import Icon from './Icon.astro';
+import Ascii from './Ascii.astro';
 import { site } from '../data/site';
 
-const mailto =
-  `mailto:${site.email}?subject=${encodeURIComponent('Hola Helger')}`;
+const mailto = `mailto:${site.email}?subject=${encodeURIComponent('Hola Helger')}`;
 const ext = { target: '_blank', rel: 'noopener noreferrer' };
 ---
 
-<section id="contacto" class="relative overflow-hidden py-24 md:py-36">
-  <div class="dots pointer-events-none absolute -left-16 bottom-0 h-64 w-64 rounded-full" aria-hidden="true"></div>
-  <div class="relative mx-auto max-w-page px-5 sm:px-8">
-    <p class="reveal mb-3 text-sm font-semibold uppercase tracking-[0.14em] text-accent-ink">Contacto</p>
-    <h2 class="reveal max-w-3xl text-5xl font-semibold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
-      ¿Hablamos? <em class="font-medium text-accent">Escríbeme.</em>
-    </h2>
-    <p class="reveal mt-6 max-w-xl text-lg text-muted">
-      Ya sea un proyecto freelance o una oportunidad laboral, respondo en menos de 24 horas.
-    </p>
+<section id="contacto" class="section section-last">
+  <div class="mx-auto grid max-w-page gap-14 px-5 sm:px-8 lg:grid-cols-12 lg:items-end">
+    <div class="lg:col-span-7">
+      <p class="reveal cap text-accent-ink"><span data-scramble>04 — Contacto</span></p>
+      <h2 class="reveal display mt-4 text-[clamp(3.6rem,15vw,8rem)] leading-[1.14]">
+        <span class="whitespace-nowrap"><span class="inv">¿</span>Hablamos?</span><br /><span class="text-accent">Escríbeme.</span>
+      </h2>
+      <p class="reveal mt-8 max-w-xl text-lg text-muted">
+        Ya sea un proyecto freelance o una oportunidad laboral, respondo en menos de 24 horas.
+      </p>
 
-    <div class="reveal mt-10 flex flex-wrap items-center gap-4">
-      <a href={mailto} class="link break-all font-display text-2xl sm:text-4xl">{site.email}</a>
-      <button
-        type="button"
-        data-copy={site.email}
-        aria-label="Copiar correo"
-        class="inline-flex min-h-[40px] items-center gap-2 rounded-full border border-line bg-surface px-4 text-sm font-medium text-muted transition-colors hover:border-ink hover:text-ink"
-      >
-        <Icon name="copy" size={16} /> <span data-copy-label aria-live="polite">Copiar</span>
-      </button>
+      <div class="reveal mt-10 flex flex-wrap items-center gap-4">
+        <a href={mailto} class="link break-all font-mono text-lg font-medium sm:text-2xl">{site.email}</a>
+        <button
+          type="button"
+          data-copy={site.email}
+          aria-label="Copiar correo"
+          class="btn btn-ghost min-h-[44px] px-4 text-xs text-muted hover:text-ink"
+        >
+          <Icon name="copy" size={14} /> <span data-copy-label aria-live="polite">Copiar</span>
+        </button>
+      </div>
+
+      <ul class="reveal mt-10 flex flex-wrap gap-x-8 gap-y-3">
+        <li><a href={site.github} {...ext} class="link">GitHub</a></li>
+        {site.linkedin && <li><a href={site.linkedin} {...ext} class="link">LinkedIn</a></li>}
+        {site.cvUrl && <li><a href={site.cvUrl} download class="link">Descargar CV</a></li>}
+      </ul>
     </div>
 
-    <ul class="reveal mt-10 flex flex-wrap gap-x-8 gap-y-3">
-      <li><a href={site.github} {...ext} class="link">GitHub</a></li>
-      {site.linkedin && <li><a href={site.linkedin} {...ext} class="link">LinkedIn</a></li>}
-      {site.cvUrl && <li><a href={site.cvUrl} download class="link">Descargar CV</a></li>}
-    </ul>
+    {/* Terminal */}
+    <div class="reveal sheet bg-surface lg:col-span-5" style="--d: 150ms">
+      <div class="cap flex items-center justify-between border-b border-line px-4 py-2.5 text-muted">
+        <span>~/helger — zsh</span>
+        <span class="flex gap-1.5" aria-hidden="true">
+          <span class="h-2 w-2 border border-line"></span><span class="h-2 w-2 border border-line"></span><span class="h-2 w-2 bg-accent"></span>
+        </span>
+      </div>
+      <div class="p-4 sm:p-6">
+        <Ascii name="terminal" cols={46} rows={7} />
+      </div>
+    </div>
   </div>
 </section>

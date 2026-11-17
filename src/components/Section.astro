@@ -1,20 +1,34 @@
 ---
 interface Props {
   id: string;
+  index: string;
   eyebrow: string;
   title: string;
+  accent?: string;
   lead?: string;
   class?: string;
 }
-const { id, eyebrow, title, lead, class: cls = '' } = Astro.props;
+const { id, index, eyebrow, title, accent, lead, class: cls = '' } = Astro.props;
+// Separa el signo de apertura (¿ ¡) para alinearlo con las mayúsculas
+// y lo une a la primera palabra para que nunca quede solo en una línea
+const opener = /^[¿¡]/.test(title) ? title[0] : '';
+const [firstWord, ...others] = (opener ? title.slice(1) : title).split(' ');
+const rest = others.length ? ' ' + others.join(' ') : '';
 ---
 
-<section id={id} class={`py-20 md:py-28 ${cls}`}>
+<section id={id} class={`section ${cls}`}>
   <div class="mx-auto max-w-page px-5 sm:px-8">
-    <header class="reveal mb-12 max-w-2xl md:mb-16">
-      <p class="mb-3 text-sm font-semibold uppercase tracking-[0.14em] text-accent-ink">{eyebrow}</p>
-      <h2 class="text-[2rem] font-semibold min-[375px]:text-4xl leading-tight tracking-tight sm:text-5xl">{title}</h2>
-      {lead && <p class="mt-5 text-lg text-muted">{lead}</p>}
+    <header class="reveal mb-[var(--space-block)] grid gap-6 border-b border-line pb-8 md:grid-cols-[1fr_auto] md:items-end">
+      <div>
+        <p class="cap text-accent-ink"><span data-scramble>{`${index} — ${eyebrow}`}</span></p>
+        <h2 class="display mt-4 text-[clamp(2.1rem,10vw,6.5rem)] leading-[0.95] [overflow-wrap:anywhere]">
+          {opener ? <span class="whitespace-nowrap"><span class="inv">{opener}</span>{firstWord}</span> : firstWord}{rest}{accent && <> <span class="text-accent">{accent}</span></>}
+        </h2>
+        {lead && <p class="mt-6 max-w-2xl text-lg text-muted">{lead}</p>}
+      </div>
+      <p class="cap hidden text-right text-muted md:block">
+        Lámina {index} / 04<br />Esc. 1:1
+      </p>
     </header>
     <slot />
   </div>

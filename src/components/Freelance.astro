@@ -1,5 +1,4 @@
 ---
-import Icon from './Icon.astro';
 import Section from './Section.astro';
 import { services, processSteps, faqs } from '../data/site';
 
@@ -16,46 +15,49 @@ const faqJsonLd = {
 
 <Section
   id="freelance"
+  index="03"
   eyebrow="Freelance"
-  title="¿Tienes un proyecto en mente?"
+  title="¿Tienes un proyecto"
+  accent="en mente?"
   lead="Además de mi trabajo actual, tomo algunos proyectos al año. Precio cerrado, plazo definido y el código queda en tus manos."
-  class="border-y border-line bg-surface"
 >
-  <div class="grid gap-x-12 gap-y-10 sm:grid-cols-2">
+  {/* Módulos: celdas que comparten borde */}
+  <div class="reveal grid gap-px border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
     {services.map((s, i) => (
-      <div class="reveal" style={`--d: ${(i % 2) * 90}ms`}>
-        <h3 class="text-2xl font-semibold">{s.title}</h3>
-        <p class="mt-2 text-muted">{s.text}</p>
+      <div class="group bg-bg p-6 transition-colors hover:bg-surface">
+        <p class="cap text-accent-ink">M-{String(i + 1).padStart(2, '0')}</p>
+        <h3 class="display mt-6 text-3xl leading-[0.95]">{s.title}</h3>
+        <p class="mt-3 text-muted">{s.text}</p>
       </div>
     ))}
   </div>
 
-  <div class="mt-20 grid gap-14 md:grid-cols-2 md:gap-20">
-    <div class="reveal">
-      <h3 class="mb-6 text-2xl font-semibold">Cómo trabajo</h3>
-      <ol class="space-y-5">
-        {processSteps.map((step, i) => (
-          <li class="flex gap-4">
-            <span class="font-display text-2xl font-semibold italic leading-none text-accent">{i + 1}</span>
-            <span class="text-muted">{step}</span>
-          </li>
-        ))}
-      </ol>
-    </div>
+  {/* Proceso: secuencia acotada */}
+  <div class="reveal block-gap">
+    <div class="dim mb-8"><span>Cómo trabajo · 4 hitos</span></div>
+    <ol class="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+      {processSteps.map((step, i) => (
+        <li>
+          <span class="display text-6xl text-accent">{String(i + 1).padStart(2, '0')}</span>
+          <p class="mt-4 border-t border-line pt-4 text-muted">{step}</p>
+        </li>
+      ))}
+    </ol>
+  </div>
 
-    <div class="reveal" style="--d: 120ms">
-      <h3 class="mb-6 text-2xl font-semibold">Preguntas frecuentes</h3>
-      <div class="divide-y divide-line border-y border-line">
-        {faqs.map((f) => (
-          <details class="group">
-            <summary class="flex min-h-[48px] cursor-pointer list-none items-center justify-between gap-4 py-4 font-medium [&::-webkit-details-marker]:hidden">
-              {f.question}
-              <Icon name="arrow-down" size={18} class="shrink-0 text-muted transition-transform group-open:rotate-180" />
-            </summary>
-            <p class="pb-5 text-muted">{f.answer}</p>
-          </details>
-        ))}
-      </div>
+  <div class="reveal block-gap grid gap-8 lg:grid-cols-12">
+    <h3 class="display text-4xl lg:col-span-4">Preguntas<br /><span class="text-accent">frecuentes</span></h3>
+    <div class="border-y border-line lg:col-span-8">
+      {faqs.map((f, i) => (
+        <details class="group border-b border-line last:border-b-0">
+          <summary class="flex min-h-[56px] cursor-pointer list-none items-center gap-4 py-4 font-medium [&::-webkit-details-marker]:hidden">
+            <span class="cap text-accent-ink">Q{i + 1}</span>
+            <span class="flex-1">{f.question}</span>
+            <span class="font-mono text-xl text-muted transition-transform group-open:rotate-45" aria-hidden="true">+</span>
+          </summary>
+          <p class="pb-5 pl-10 text-muted">{f.answer}</p>
+        </details>
+      ))}
     </div>
   </div>
   <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
