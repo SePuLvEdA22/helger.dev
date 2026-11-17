@@ -37,7 +37,7 @@
 :root { color-scheme: light; }
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 5rem;
+  scroll-padding-top: 4rem;
 }
 body {
   background-color: var(--color-bg);
@@ -75,7 +75,11 @@ p { text-wrap: pretty; }
   --space-section: clamp(4rem, 8vw, 6rem);
   --space-block: clamp(2.5rem, 5vw, 4rem);
 }
-.section { padding-top: var(--space-section); }
+.section {
+  padding-top: var(--space-section);
+  /* Al saltar desde el menú, el rótulo queda justo bajo la barra fija */
+  scroll-margin-top: calc(1.5rem - var(--space-section));
+}
 .section-last { padding-bottom: var(--space-section); }
 .block-gap { margin-top: var(--space-block); }
 
