@@ -3,9 +3,9 @@ import Section from './Section.astro';
 import { stack } from '../data/site';
 ---
 
-<Section id="sobre-mi" eyebrow="Sobre mí" title="Del microcontrolador a la nube">
-  <div class="grid gap-14 md:grid-cols-[1.2fr_1fr] md:gap-20">
-    <div class="reveal space-y-5 text-lg leading-relaxed">
+<Section id="sobre-mi" index="02" eyebrow="Sobre mí" title="Del microcontrolador" accent="a la nube.">
+  <div class="grid gap-14 lg:grid-cols-12 lg:gap-12">
+    <div class="reveal space-y-5 text-lg leading-relaxed lg:col-span-6">
       <p>
         Soy desarrollador de software y estudiante de Ingeniería de Software en Cúcuta, Colombia.
         Me gusta el rango completo: desde leer un sensor por puerto serial hasta desplegar una app
@@ -22,13 +22,27 @@ import { stack } from '../data/site';
       </p>
     </div>
 
-    <dl class="reveal divide-y divide-line border-y border-line" style="--d: 120ms">
-      {stack.map((s) => (
-        <div class="grid gap-1 py-4 sm:grid-cols-[8.5rem_1fr] sm:gap-4">
-          <dt class="text-sm font-semibold text-muted">{s.group}</dt>
-          <dd>{s.items.join(', ')}</dd>
-        </div>
-      ))}
-    </dl>
+    {/* Lista de materiales, como el cajetín de un plano */}
+    <div class="reveal lg:col-span-6" style="--d: 120ms">
+      <p class="cap mb-3 text-muted">Lista de materiales</p>
+      <table class="w-full border-collapse border border-line text-left">
+        <thead class="cap text-muted">
+          <tr class="border-b border-line">
+            <th scope="col" class="hidden w-16 border-r border-line px-3 py-2 font-normal sm:table-cell">Ref.</th>
+            <th scope="col" class="border-r border-line px-3 py-2 font-normal">Grupo</th>
+            <th scope="col" class="px-3 py-2 font-normal">Componentes</th>
+          </tr>
+        </thead>
+        <tbody>
+          {stack.map((s, i) => (
+            <tr class="border-b border-line transition-colors last:border-b-0 hover:bg-surface">
+              <td class="cap hidden border-r border-line px-3 py-3 align-top text-accent-ink sm:table-cell">A-{String(i + 1).padStart(2, '0')}</td>
+              <th scope="row" class="cap border-r border-line px-3 py-3 align-top font-medium">{s.group}</th>
+              <td class="px-3 py-3 align-top">{s.items.join(', ')}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   </div>
 </Section>

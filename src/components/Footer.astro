@@ -1,16 +1,33 @@
 ---
 import { site } from '../data/site';
 const year = new Date().getFullYear();
+const ext = { target: '_blank', rel: 'noopener noreferrer' };
 ---
 
-<footer class="border-t border-line">
-  <div class="mx-auto flex max-w-page flex-col gap-3 px-5 py-8 text-sm text-muted sm:flex-row sm:items-center sm:justify-between sm:px-8">
-    <span>© {year} {site.name}</span>
-    <nav aria-label="Pie de página" class="-mx-2 flex flex-wrap">
-      <a href="#proyectos" class="whitespace-nowrap px-2 py-2.5 hover:text-ink">Proyectos</a>
-      <a href="#sobre-mi" class="whitespace-nowrap px-2 py-2.5 hover:text-ink">Sobre mí</a>
-      <a href="#freelance" class="whitespace-nowrap px-2 py-2.5 hover:text-ink">Freelance</a>
-      <a href={site.github} target="_blank" rel="noopener noreferrer" class="whitespace-nowrap px-2 py-2.5 hover:text-ink">GitHub</a>
+{/* Cajetín: el bloque de títulos de un plano */}
+<footer class="mx-auto max-w-page px-5 pb-10 sm:px-8">
+  <div class="cap grid gap-px border border-line bg-line text-muted sm:grid-cols-2 lg:grid-cols-[1.2fr_1fr_1.4fr_0.6fr_0.6fr]">
+    <div class="bg-bg p-4">
+      <p>Proyecto</p>
+      <p class="mt-1 text-ink">© {year} {site.name}</p>
+    </div>
+    <div class="bg-bg p-4">
+      <p>Ubicación</p>
+      <p class="mt-1 text-ink">{site.location} · {site.timezone}</p>
+    </div>
+    <nav aria-label="Pie de página" class="bg-bg p-2 sm:col-span-2 lg:col-span-1">
+      <a href="#proyectos" class="inline-block px-2 py-2.5 hover:text-ink">Proyectos</a>
+      <a href="#sobre-mi" class="inline-block px-2 py-2.5 hover:text-ink">Sobre mí</a>
+      <a href="#freelance" class="inline-block px-2 py-2.5 hover:text-ink">Freelance</a>
+      <a href={site.github} {...ext} class="inline-block px-2 py-2.5 hover:text-ink">GitHub</a>
     </nav>
+    <div class="bg-bg p-4">
+      <p>Escala</p>
+      <p class="mt-1 text-ink">1:1</p>
+    </div>
+    <div class="bg-bg p-4">
+      <p>Lámina</p>
+      <p class="mt-1 text-accent-ink">04 / 04</p>
+    </div>
   </div>
 </footer>
