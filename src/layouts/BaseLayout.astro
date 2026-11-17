@@ -1,6 +1,6 @@
 ---
-import '@fontsource-variable/fraunces/opsz.css';
-import '@fontsource-variable/fraunces/opsz-italic.css';
+import '@fontsource-variable/oswald';
+import '@fontsource-variable/jetbrains-mono';
 import '@fontsource-variable/inter';
 import '../styles/global.css';
 import Header from '../components/Header.astro';
@@ -37,8 +37,8 @@ const personJsonLd = {
     <meta name="description" content={description} />
     <meta name="author" content={site.name} />
     <link rel="canonical" href={canonicalURL} />
-    <meta name="theme-color" content="#f6f4ef" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#121430" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#e9e3d4" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#133b3a" media="(prefers-color-scheme: dark)" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="es_CO" />
     <meta property="og:url" content={canonicalURL} />
@@ -68,7 +68,7 @@ const personJsonLd = {
   <body class="min-h-screen font-sans">
     <a
       href="#contenido"
-      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-md focus:bg-ink focus:px-4 focus:py-2 focus:text-sm focus:text-bg"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:bg-ink focus:px-4 focus:py-2 focus:text-sm focus:text-bg"
     >
       Saltar al contenido
     </a>
@@ -78,6 +78,11 @@ const personJsonLd = {
     </main>
     <Footer />
 
+    <script>
+      import { mountAscii, mountScramble } from '../scripts/ascii';
+      mountAscii();
+      mountScramble();
+    </script>
     <script is:inline>
       // Reveal on scroll
       const els = document.querySelectorAll('.reveal');
@@ -97,6 +102,9 @@ const personJsonLd = {
       document.getElementById('theme-toggle')?.addEventListener('click', () => {
         const d = document.documentElement;
         d.dataset.theme = d.dataset.theme === 'dark' ? 'light' : 'dark';
+        document.querySelectorAll('meta[name="theme-color"]').forEach((m) => {
+          m.setAttribute('content', d.dataset.theme === 'dark' ? '#133b3a' : '#e9e3d4');
+        });
         try { localStorage.setItem('theme', d.dataset.theme); } catch {}
       });
 

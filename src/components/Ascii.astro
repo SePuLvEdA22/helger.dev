@@ -1,0 +1,24 @@
+---
+// Lienzo ASCII: se pinta un fotograma estático en build y el script de
+// src/scripts/ascii.ts lo anima cuando entra en pantalla.
+import { renderStill } from '../scripts/ascii';
+
+interface Props {
+  name: 'stack' | 'systemPlan' | 'gymPlan' | 'radar' | 'phone' | 'terminal';
+  cols: number;
+  rows: number;
+  class?: string;
+}
+const { name, cols, rows, class: cls = '' } = Astro.props;
+const still = renderStill(name);
+---
+
+<div
+  class={`ascii ${cls}`}
+  data-ascii={name}
+  style={`--cols: ${cols}; aspect-ratio: ${cols * 0.6} / ${rows * 1.15}`}
+  aria-hidden="true"
+>
+  <pre class="ascii-base">{still.base}</pre>
+  <pre class="ascii-hot">{still.hot}</pre>
+</div>

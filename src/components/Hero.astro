@@ -1,31 +1,77 @@
 ---
 import Icon from './Icon.astro';
-import Avatar from './Avatar.astro';
+import Ascii from './Ascii.astro';
 import { site } from '../data/site';
 ---
 
-<section id="inicio" class="mx-auto grid max-w-page items-center gap-12 px-5 pb-20 pt-16 sm:px-8 md:grid-cols-[1.4fr_1fr] md:pb-28 md:pt-24">
-  <div>
-    <p class="rise mb-6 inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3 py-1 text-sm text-muted">
-      <span class="h-2 w-2 rounded-full bg-soft-ink" aria-hidden="true"></span>
-      {site.availability}
-    </p>
-    <h1 class="rise text-5xl font-semibold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl" style="--d: 80ms">
-      Hola, soy <em class="font-medium text-accent">{site.firstName}</em>.
-    </h1>
-    <p class="rise mt-6 max-w-xl text-lg leading-relaxed text-muted sm:text-xl" style="--d: 160ms">
-      {site.role} en {site.location}. {site.intro}
-    </p>
-    <div class="rise mt-9 flex flex-wrap items-center gap-x-6 gap-y-4" style="--d: 240ms">
-      <a
-        href="#proyectos"
-        class="inline-flex min-h-[48px] items-center gap-2 rounded-full bg-ink px-6 font-semibold text-bg transition-colors hover:bg-accent-ink"
-      >
-        Ver proyectos <Icon name="arrow-down" size={18} />
-      </a>
-      <a href="#contacto" class="link">Hablemos de tu proyecto</a>
+<section id="inicio" class="mx-auto max-w-page px-5 pt-8 sm:px-8 md:pt-12">
+  <div class="sheet grid gap-x-10 gap-y-12 p-5 sm:p-8 lg:grid-cols-12 lg:p-10">
+    {/* A · Rótulo + titular */}
+    <div class="lg:col-span-7 lg:col-start-1 lg:row-start-1">
+      <p class="rise font-mono text-base uppercase tracking-[0.32em] sm:text-xl">{site.name}</p>
+      <p class="cap rise tick mt-5 text-muted" style="--d: 120ms">
+        <span class="block" data-scramble>El software</span>
+        <span class="block" data-scramble>es un problema</span>
+        <span class="block" data-scramble>traducido</span>
+        <span class="block" data-scramble>a lógica.</span>
+      </p>
+      <h1 class="display mt-8 text-[clamp(3.6rem,18vw,9.5rem)] lg:text-[clamp(6rem,9.4vw,9.5rem)]">
+        <span class="sr-only">{site.name}, {site.role}: </span>
+        <span class="wipe" style="--d: 150ms">Software</span>
+        <span class="wipe text-accent" style="--d: 300ms">que</span>
+        <span class="wipe" style="--d: 450ms">funciona.</span>
+      </h1>
+    </div>
+
+    {/* C · Intro + CTAs */}
+    <div class="rise lg:col-span-5 lg:col-start-1 lg:row-start-2 lg:self-end" style="--d: 500ms">
+      <p class="inline-flex items-center gap-2 border border-line px-3 py-1.5 cap text-ink">
+        <span class="blink h-2 w-2 bg-accent" aria-hidden="true"></span>
+        {site.availability}
+      </p>
+      <p class="mt-6 max-w-lg text-lg leading-relaxed text-muted">
+        {site.role} en {site.location}. {site.intro}
+      </p>
+      <div class="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
+        <a href="#proyectos" class="btn btn-primary">
+          Ver proyectos <Icon name="arrow-down" size={16} />
+        </a>
+        <a href="#contacto" class="link">Hablemos de tu proyecto</a>
+      </div>
+    </div>
+
+    {/* B · Stack 3D */}
+    <div class="rise lg:col-span-5 lg:col-start-8 lg:row-start-1" style="--d: 250ms">
+      <div class="cap mb-4 flex items-start justify-between gap-4 text-muted">
+        <span>Fig. 01<br />El stack</span>
+        <span class="text-right">{site.location}<br />{site.timezone} · {new Date().getFullYear()}</span>
+      </div>
+      <div class="dim mb-2"><span>3 capas · 1 sistema</span></div>
+      <Ascii name="stack" cols={70} rows={34} class="mx-auto max-w-[34rem]" />
+      <p class="cap mt-3 flex flex-wrap justify-center gap-x-5 text-muted">
+        <span>01 Interfaz</span><span class="text-accent-ink">02 API</span><span>03 Datos</span>
+      </p>
+    </div>
+
+    {/* D · Plano del sistema */}
+    <div class="rise lg:col-span-7 lg:col-start-6 lg:row-start-2" style="--d: 400ms">
+      <div class="dim mb-3"><span>Fig. 02 · Del sensor a la nube</span></div>
+      <Ascii name="systemPlan" cols={56} rows={12} />
+    </div>
+
+    {/* E · Cita / F · Radar / G · Pie */}
+    <div class="grid gap-10 border-t border-line pt-10 sm:grid-cols-3 sm:items-end lg:col-span-12 lg:row-start-3">
+      <blockquote class="cap tick text-muted">
+        <p class="text-ink">“La simplicidad es<br />prerrequisito de<br />la fiabilidad.”</p>
+        <footer class="mt-1">— Edsger W. Dijkstra</footer>
+      </blockquote>
+      <div class="mx-auto w-full max-w-[15rem]">
+        <Ascii name="radar" cols={41} rows={21} />
+        <p class="cap mt-2 text-center text-muted">Fig. 03 · Monitoreo</p>
+      </div>
+      <p class="cap tick text-muted sm:text-right sm:[&::after]:ml-auto">
+        Menos código.<br />Más software.<br />Lo esencial.
+      </p>
     </div>
   </div>
-
-  <div class="rise" style="--d: 200ms"><Avatar /></div>
 </section>

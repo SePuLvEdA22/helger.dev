@@ -1,59 +1,77 @@
 ---
-import Icon from './Icon.astro';
 import Section from './Section.astro';
+import Ascii from './Ascii.astro';
 import { projects, site } from '../data/site';
 
 const [featured, ...rest] = projects;
 const ext = { target: '_blank', rel: 'noopener noreferrer' };
+const total = String(projects.length).padStart(2, '0');
 ---
 
-<Section id="proyectos" eyebrow="Proyectos" title="Cosas que he construido">
-  {/* Destacado */}
-  <article class="reveal relative overflow-hidden rounded-3xl border border-line bg-surface p-7 sm:p-10 md:p-12">
-    <div class="stripes pointer-events-none absolute -right-10 -top-10 h-48 w-48 rounded-full opacity-70" aria-hidden="true"></div>
-    <div class="relative grid gap-8 md:grid-cols-[1fr_1.1fr] md:gap-12">
-      <div>
-        <p class="mb-3 text-sm font-semibold text-soft-ink">01 · Destacado</p>
-        <h3 class="text-4xl font-semibold tracking-tight sm:text-5xl">{featured.title}</h3>
-        <p class="mt-3 text-lg text-muted">{featured.summary}</p>
-        {featured.status && (
-          <p class="mt-6 inline-flex items-center gap-2 rounded-full bg-soft px-3 py-1 text-sm font-medium text-soft-ink">
-            <Icon name="check" size={16} /> {featured.status}
-          </p>
-        )}
-      </div>
-      <div class="flex flex-col justify-between gap-8">
-        <p class="leading-relaxed">{featured.description}</p>
-        <div>
-          <p class="mb-5 text-sm text-muted">{featured.tags.join(' · ')}</p>
-          <div class="flex flex-wrap gap-6">
-            <a href={featured.codeUrl} {...ext} class="link">Ver código</a>
-            {featured.demoUrl && <a href={featured.demoUrl} {...ext} class="link">Ver demo</a>}
-          </div>
+<Section id="proyectos" index="01" eyebrow="Proyectos" title="Cosas que he" accent="construido.">
+  {/* Destacado: plano del flujo de datos */}
+  <article class="reveal sheet grid gap-10 p-5 sm:p-8 lg:grid-cols-12 lg:gap-12 lg:p-10">
+    <div class="lg:col-span-5">
+      <p class="cap flex justify-between text-muted">
+        <span class="text-accent-ink">01 / {total} · Destacado</span>
+      </p>
+      <h3 class="display mt-4 text-[clamp(3rem,8vw,5.5rem)]">{featured.title}</h3>
+      <p class="mt-4 text-lg">{featured.summary}</p>
+      <p class="mt-4 leading-relaxed text-muted">{featured.description}</p>
+
+      <dl class="cap mt-8 divide-y divide-line border-y border-line">
+        <div class="grid grid-cols-[6rem_1fr] gap-4 py-3">
+          <dt class="text-muted">Stack</dt><dd>{featured.tags.join(' · ')}</dd>
         </div>
+        {featured.status && (
+          <div class="grid grid-cols-[6rem_1fr] gap-4 py-3">
+            <dt class="text-muted">Estado</dt>
+            <dd class="flex items-center gap-2 text-accent-ink">
+              <span class="blink h-2 w-2 shrink-0 bg-accent" aria-hidden="true"></span>{featured.status}
+            </dd>
+          </div>
+        )}
+      </dl>
+
+      <div class="mt-8 flex flex-wrap gap-6">
+        <a href={featured.codeUrl} {...ext} class="link">Ver código</a>
+        {featured.demoUrl && <a href={featured.demoUrl} {...ext} class="link">Ver demo</a>}
       </div>
+    </div>
+
+    <div class="flex flex-col justify-center lg:col-span-7">
+      <div class="dim mb-4"><span>Fig. 04 · Flujo en tiempo real</span></div>
+      <Ascii name="gymPlan" cols={55} rows={12} />
+      <p class="cap mt-4 text-muted">
+        Huella → Arduino → app → torniquete. <span class="text-accent-ink">■</span> = paquete por serial.
+      </p>
     </div>
   </article>
 
   {/* Resto */}
-  <div class="mt-16 grid gap-x-12 gap-y-14 md:grid-cols-2">
+  <div class="mt-8 grid gap-8 md:grid-cols-2">
     {rest.map((p, i) => (
-      <article class="reveal border-t border-ink/80 pt-6" style={`--d: ${(i % 2) * 90}ms`}>
+      <article class="reveal group sheet flex flex-col p-5 sm:p-7" style={`--d: ${(i % 2) * 90}ms`}>
+        <p class="cap mb-5 flex justify-between text-muted">
+          <span><span class="text-accent-ink">{String(i + 2).padStart(2, '0')}</span> / {total}</span>
+          <span>{p.tags[0]}</span>
+        </p>
         {p.image ? (
-          <img src={p.image} alt={`Captura de ${p.title}`} width="1280" height="800" loading="lazy" decoding="async" class="mb-6 aspect-[16/10] w-full rounded-xl border border-line object-cover object-top" />
+          <div class="duotone border border-line">
+            <img src={p.image} alt={`Captura de ${p.title}`} width="1280" height="800" loading="lazy" decoding="async" class="aspect-[16/10] w-full object-cover object-top" />
+          </div>
         ) : (
-          <div class="dots mb-6 flex aspect-[16/10] w-full items-center justify-center rounded-xl border border-line bg-surface" aria-hidden="true">
-            <span class="bg-surface px-4 font-display text-4xl font-medium italic text-soft-ink">{p.title}</span>
+          <div class="flex aspect-[16/10] w-full items-center justify-center border border-line" aria-hidden="true">
+            <Ascii name="phone" cols={26} rows={22} class="w-[34%]" />
           </div>
         )}
-        <div class="flex items-baseline justify-between gap-4">
-          <h3 class="text-3xl font-semibold tracking-tight">{p.title}</h3>
-          <span class="text-sm tabular-nums text-muted">{String(i + 2).padStart(2, '0')}</span>
-        </div>
-        <p class="mt-2 font-medium">{p.summary}</p>
+        <h3 class="display mt-6 text-4xl sm:text-5xl">{p.title}</h3>
+        <p class="mt-3 font-medium">{p.summary}</p>
         <p class="mt-3 leading-relaxed text-muted">{p.description}</p>
-        <p class="mt-4 text-sm text-muted">{p.tags.join(' · ')}</p>
-        <div class="mt-5 flex flex-wrap gap-6">
+        <ul class="cap mt-5 flex flex-wrap gap-2 text-muted">
+          {p.tags.map((t) => <li class="border border-line px-2 py-0.5">{t}</li>)}
+        </ul>
+        <div class="mt-auto flex flex-wrap gap-6 pt-6">
           {p.demoUrl && <a href={p.demoUrl} {...ext} class="link">Ver demo</a>}
           <a href={p.codeUrl} {...ext} class="link">Código</a>
         </div>
@@ -61,7 +79,7 @@ const ext = { target: '_blank', rel: 'noopener noreferrer' };
     ))}
   </div>
 
-  <p class="reveal mt-16 text-muted">
-    Más en <a href={site.github} target="_blank" rel="noopener noreferrer" class="link text-ink">github.com/{site.githubHandle}</a>
+  <p class="reveal cap mt-8 text-muted">
+    Más en <a href={site.github} {...ext} class="link normal-case tracking-normal text-ink">github.com/{site.githubHandle}</a>
   </p>
 </Section>
